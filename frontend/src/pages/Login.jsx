@@ -76,7 +76,7 @@ export default function Login() {
   };
 
   return (
-    <div className="min-h-screen flex">
+    <div className="flex flex-1 min-h-[calc(100vh-64px)]">
       {/* ── Left Panel (Branding) ─────────────────── */}
       <div className="hidden lg:flex lg:w-[55%] auth-bg flex-col justify-between p-12 relative overflow-hidden">
         {/* Decorative circles */}

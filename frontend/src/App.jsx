@@ -45,7 +45,8 @@ import AdminModeration    from './pages/admin/AdminModeration';
 import AdminSystem        from './pages/admin/AdminSystem';
 
 // ── Layout ────────────────────────────────────────────────────
-import MainLayout from './components/Layout/MainLayout';
+import MainLayout   from './components/Layout/MainLayout';
+import PublicLayout from './components/Layout/PublicLayout';
 
 function ProtectedRoute({ children }) {
   const { isAuthenticated } = useAuthStore();
@@ -55,9 +56,13 @@ function ProtectedRoute({ children }) {
 export default function App() {
   return (
     <Routes>
-      {/* ── Public ──────────────────────────────────────────── */}
-      <Route path="/login"    element={<Login />} />
-      <Route path="/register" element={<Register />} />
+      {/* ── Public (with header navbar, no sidebar) ────────── */}
+      <Route element={<PublicLayout />}>
+        <Route path="/login"    element={<Login />} />
+        <Route path="/register" element={<Register />} />
+      </Route>
+
+      {/* ── Google OAuth callback (no layout needed) ────────── */}
       <Route path="/auth/google/success" element={<GoogleAuthSuccess />} />
 
       {/* ── Onboarding (no sidebar) ─────────────────────────── */}

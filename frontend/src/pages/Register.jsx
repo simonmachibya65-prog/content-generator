@@ -83,7 +83,7 @@ export default function Register() {
   };
 
   return (
-    <div className="min-h-screen flex">
+    <div className="flex flex-1 min-h-[calc(100vh-64px)]">
       {/* ── Left panel ─── */}
       <div className="hidden lg:flex lg:w-[45%] auth-bg flex-col justify-center p-12 relative overflow-hidden">
         <div className="absolute top-[-100px] right-[-80px] w-[350px] h-[350px] rounded-full bg-indigo-600/10 blur-3xl" />
