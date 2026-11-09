@@ -1,6 +1,6 @@
 #!/bin/bash
 # ═══════════════════════════════════════════════════════════
-#  Cotents - Deploy Script
+#  Publift - Deploy Script
 #  Usage:
 #    bash deploy.sh           → full deploy (build + start)
 #    bash deploy.sh start     → start existing containers
@@ -23,7 +23,7 @@ BLUE='\033[0;34m'; CYAN='\033[0;36m'; NC='\033[0m'
 banner() {
   echo ""
   echo -e "${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
-  echo -e "${CYAN}  🚀  Cotents Deployment${NC}"
+  echo -e "${CYAN}  🚀  Publift Deployment${NC}"
   echo -e "${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
   echo ""
 }
@@ -146,7 +146,7 @@ case "$CMD" in
     echo -e "${BLUE}Resource usage:${NC}"
     docker stats --no-stream --format \
       "table {{.Name}}\t{{.CPUPerc}}\t{{.MemUsage}}\t{{.NetIO}}" \
-      cotents_frontend cotents_backend cotents_postgres 2>/dev/null || true
+      publift_frontend publift_backend publift_postgres 2>/dev/null || true
     ;;
 
   secrets)
@@ -155,7 +155,7 @@ case "$CMD" in
 
   db-shell)
     echo -e "${BLUE}Connecting to database...${NC}"
-    docker compose exec postgres psql -U "${DB_USER:-cotents}" -d "${DB_NAME:-cotents_db}"
+    docker compose exec postgres psql -U "${DB_USER:-publift}" -d "${DB_NAME:-publift_db}"
     ;;
 
   db-backup)
@@ -163,7 +163,7 @@ case "$CMD" in
     BACKUP_FILE="backup_${TIMESTAMP}.sql"
     echo -e "${BLUE}Creating backup: ${BACKUP_FILE}${NC}"
     docker compose exec -T postgres pg_dump \
-      -U "${DB_USER:-cotents}" "${DB_NAME:-cotents_db}" > "$BACKUP_FILE"
+      -U "${DB_USER:-publift}" "${DB_NAME:-publift_db}" > "$BACKUP_FILE"
     echo -e "${GREEN}✅  Backup saved: ${BACKUP_FILE}${NC}"
     ;;
 

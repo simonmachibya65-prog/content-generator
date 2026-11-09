@@ -1,8 +1,8 @@
 <div align="center">
 
-# 🚀 Cotents - AI Social Media Management Platform
+# 🚀 Publift - AI Social Media Management Platform
 
-**Create once. Enhance professionally. Publish everywhere. Grow intelligently.**
+**Lift your publishing game. Create once. Publish everywhere. Grow intelligently.**
 
 [![License](https://img.shields.io/badge/license-Proprietary-red.svg)](LICENSE)
 [![Node.js](https://img.shields.io/badge/Node.js-18+-green.svg)](https://nodejs.org)
@@ -97,7 +97,7 @@ Create and manage social media ads:
 ## 🏗️ Architecture
 
 ```
-cotents/
+publift/
 ├── backend/                    # Node.js + Express REST API
 │   ├── src/
 │   │   ├── adapters/          # Platform-specific OAuth & Publishing
@@ -204,10 +204,10 @@ sudo apt install postgresql  # Linux
 brew install postgresql       # macOS
 
 # Create database
-createdb cotents_db
+createdb publift_db
 
 # Update .env
-DATABASE_URL=postgresql://user:password@localhost:5432/cotents_db
+DATABASE_URL=postgresql://user:password@localhost:5432/publift_db
 
 # Run migrations
 cd backend && npm run migrate
@@ -439,7 +439,7 @@ Full documentation: [backend/README.md](backend/README.md)
 This is a proprietary commercial product. Contributions are welcome by invitation only.
 
 If you'd like to contribute:
-1. Contact us at dev@cotents.io
+1. Contact us at dev@publift.io
 2. Review our contribution guidelines
 3. Sign the Contributor License Agreement (CLA)
 
@@ -449,14 +449,14 @@ If you'd like to contribute:
 
 **Proprietary License** - All Rights Reserved
 
-Copyright © 2024-2025 Cotents. Unauthorized copying, modification, distribution, or use of this software is strictly prohibited.
+Copyright © 2024-2025 Publift. Unauthorized copying, modification, distribution, or use of this software is strictly prohibited.
 
 ---
 
 ## 💬 Support & Contact
 
-- **Email:** support@cotents.io
-- **Documentation:** [docs.cotents.io](https://docs.cotents.io)
+- **Email:** support@publift.io
+- **Documentation:** [docs.publift.io](https://docs.publift.io)
 - **Issues:** Report bugs via GitHub Issues
 - **Feature Requests:** Use GitHub Discussions
 
@@ -477,6 +477,6 @@ Built with these amazing technologies:
 
 ⭐ Star this repo if you find it useful!
 
-[Website](https://cotents.io) • [Documentation](https://docs.cotents.io) • [Twitter](https://twitter.com/cotents) • [LinkedIn](https://linkedin.com/company/cotents)
+[Website](https://publift.io) • [Documentation](https://docs.publift.io) • [Twitter](https://twitter.com/publift) • [LinkedIn](https://linkedin.com/company/publift)
 
 </div>

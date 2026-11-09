@@ -38,7 +38,7 @@ export default function AdminDashboard() {
             </div>
             <div>
               <p className="text-sm font-bold text-white">Super Admin</p>
-              <p className="text-[10px] text-gray-500">Cotents Control Panel</p>
+              <p className="text-[10px] text-gray-500">Publift Control Panel</p>
             </div>
           </div>
         </div>

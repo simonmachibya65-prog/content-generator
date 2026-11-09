@@ -1,18 +1,18 @@
 #!/bin/bash
-# ─── Cotents Database Setup ───────────────────────────────────
+# ─── Publift Database Setup ───────────────────────────────────
 # Run this ONCE to create the PostgreSQL user and database.
 # Usage: bash setup-db.sh
 # ─────────────────────────────────────────────────────────────
 
 set -e
 
-DB_USER="cotents"
-DB_PASS="cotents_secure_2024"
-DB_NAME="cotents_db"
+DB_USER="publift"
+DB_PASS="publift_secure_2024"
+DB_NAME="publift_db"
 
 echo ""
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-echo "  Cotents – PostgreSQL Setup"
+echo "  Publift – PostgreSQL Setup"
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 echo ""
 echo "This script needs to run as the 'postgres' OS user."

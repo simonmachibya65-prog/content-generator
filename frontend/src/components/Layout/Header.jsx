@@ -39,7 +39,7 @@ export default function Header({ onToggleSidebar }) {
   }, { refetchInterval: 60000 });
 
   const unreadCount = notifsData?.notifications?.length || 0;
-  const page = PAGE_TITLES[location.pathname] || { title: 'Cotents', subtitle: '' };
+  const page = PAGE_TITLES[location.pathname] || { title: 'Publift', subtitle: '' };
 
   useEffect(() => {
     const handler = (e) => {

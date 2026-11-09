@@ -2,7 +2,7 @@
 
 ## Overview
 
-This document provides comprehensive testing procedures for the Cotents platform across devices, browsers, and accessibility requirements.
+This document provides comprehensive testing procedures for the Publift platform across devices, browsers, and accessibility requirements.
 
 ---
 

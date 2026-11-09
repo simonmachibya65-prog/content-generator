@@ -1,5 +1,5 @@
 -- ============================================================
--- COTENTS DATABASE SCHEMA
+-- PUBLIFT DATABASE SCHEMA
 -- AI Social Media Management Platform
 -- ============================================================
 

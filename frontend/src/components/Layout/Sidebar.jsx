@@ -99,7 +99,7 @@ export default function Sidebar({ collapsed, onToggle }) {
           </div>
           {!collapsed && (
             <div>
-              <span className="text-lg font-bold text-white tracking-tight">Cotents</span>
+          <span className="text-lg font-bold text-white tracking-tight">Publift</span>
               <div className="flex items-center gap-1.5">
                 <span className={clsx('text-[10px] px-1.5 py-0.5 rounded font-semibold uppercase tracking-wide', planStyle.bg, planStyle.text)}>
                   {user?.plan || 'free'}

@@ -1,7 +1,7 @@
 {
-  "name": "cotents-backend",
+  "name": "publift-backend",
   "version": "1.0.0",
-  "description": "Cotents - AI Social Media Management Platform - Backend API",
+  "description": "Publift - AI Social Media Management Platform - Backend API",
   "main": "src/server.js",
   "scripts": {
     "start": "node src/server.js",

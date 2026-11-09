@@ -91,7 +91,7 @@ app.use('/api/advertising', advertisingRoutes);
 app.get('/health', (req, res) => {
   res.json({
     status: 'ok',
-    service: 'Cotents API',
+    service: 'Publift API',
     version: '1.0.0',
     timestamp: new Date().toISOString()
   });
@@ -122,7 +122,7 @@ async function start() {
     logger.info('Scheduler initialized');
 
     app.listen(PORT, () => {
-      logger.info(`Cotents API running on port ${PORT}`);
+      logger.info(`Publift API running on port ${PORT}`);
       logger.info(`Environment: ${process.env.NODE_ENV}`);
     });
   } catch (err) {

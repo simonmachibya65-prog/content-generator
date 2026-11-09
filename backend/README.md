@@ -1,4 +1,4 @@
-# Cotents Backend API
+# Publift Backend API
 
 AI-powered social media management platform backend.
 

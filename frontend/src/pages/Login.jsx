@@ -89,7 +89,7 @@ export default function Login() {
             <div className="w-10 h-10 bg-gradient-to-br from-accent-primary to-emerald-500 rounded-xl flex items-center justify-center shadow-glow-teal">
               <Zap size={22} className="text-dark-base" />
             </div>
-            <span className="text-2xl font-bold text-white tracking-tight">Cotents</span>
+            <span className="text-2xl font-bold text-white tracking-tight">Publift</span>
           </div>
         </div>
 
@@ -151,7 +151,7 @@ export default function Login() {
             <div className="w-9 h-9 bg-gradient-to-br from-accent-primary to-emerald-500 rounded-xl flex items-center justify-center">
               <Zap size={18} className="text-dark-base" />
             </div>
-            <span className="text-xl font-bold text-white">Cotents</span>
+            <span className="text-xl font-bold text-white">Publift</span>
           </div>
 
           <div className="mb-8">
