@@ -1,0 +1,312 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── Root Variables (Light Theme — Professional SaaS) ─────── */
+:root {
+  /* Backgrounds */
+  --bg-primary:    #ffffff;
+  --bg-secondary:  #f8fafc;
+  --bg-card:       #ffffff;
+  --bg-elevated:   #f1f5f9;
+  --bg-muted:      #f8fafc;
+
+  /* Borders */
+  --border:        #e2e8f0;
+  --border-light:  #f1f5f9;
+
+  /* Text */
+  --text-primary:   #0f172a;
+  --text-secondary: #475569;
+  --text-muted:     #94a3b8;
+
+  /* Brand */
+  --accent-blue:    #2563eb;
+  --accent-indigo:  #4f46e5;
+  --accent-teal:    #0891b2;
+
+  /* Semantic */
+  --success:  #16a34a;
+  --warning:  #d97706;
+  --danger:   #dc2626;
+  --info:     #2563eb;
+
+  /* Sidebar */
+  --sidebar-bg:     #ffffff;
+  --sidebar-border: #e2e8f0;
+  --sidebar-hover:  #f1f5f9;
+  --sidebar-active-bg: #eff6ff;
+  --sidebar-active-text: #2563eb;
+}
+
+/* Dark mode override */
+.dark {
+  --bg-primary:    #0f1117;
+  --bg-secondary:  #1a1f2e;
+  --bg-card:       #252b3f;
+  --bg-elevated:   #2d3447;
+  --bg-muted:      #1a1f2e;
+  --border:        #2d3748;
+  --border-light:  #3a4258;
+  --text-primary:  #ffffff;
+  --text-secondary: #a0aec0;
+  --text-muted:    #6b7280;
+  --sidebar-bg:    #0f1117;
+  --sidebar-border: #2d3748;
+  --sidebar-hover: #303648;
+  --sidebar-active-bg: rgba(37,99,235,0.15);
+  --sidebar-active-text: #60a5fa;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+}
+
+/* ─── Scrollbar ───────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: var(--bg-secondary); }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
+
+/* ─── Animations ──────────────────────────────────────────────── */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes slideInLeft {
+  from { opacity: 0; transform: translateX(-16px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+.animate-fade-in-up { animation: fadeInUp 0.4s ease forwards; }
+.animate-fade-in    { animation: fadeIn 0.3s ease forwards; }
+.animate-slide-in   { animation: slideInLeft 0.3s ease forwards; }
+.animate-slide-down { animation: slideDown 0.2s ease forwards; }
+.animate-spin-slow  { animation: spin-slow 8s linear infinite; }
+
+.stagger-1 { animation-delay: 0.05s; opacity: 0; }
+.stagger-2 { animation-delay: 0.10s; opacity: 0; }
+.stagger-3 { animation-delay: 0.15s; opacity: 0; }
+.stagger-4 { animation-delay: 0.20s; opacity: 0; }
+
+/* ─── Skeleton Loading ────────────────────────────────────────── */
+.skeleton {
+  background: linear-gradient(90deg, #f1f5f9 25%, #e2e8f0 50%, #f1f5f9 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 8px;
+}
+.dark .skeleton {
+  background: linear-gradient(90deg, #252b3f 25%, #2d3447 50%, #252b3f 75%);
+  background-size: 200% 100%;
+}
+
+/* ─── Glass Effect ────────────────────────────────────────────── */
+.glass {
+  background: rgba(255,255,255,0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(226,232,240,0.8);
+}
+.dark .glass {
+  background: rgba(37,43,63,0.85);
+  border: 1px solid rgba(45,55,72,0.8);
+}
+
+/* ─── Gradient Text ──────────────────────────────────────────── */
+.gradient-text {
+  background: linear-gradient(135deg, #2563eb, #4f46e5);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.gradient-text-teal {
+  background: linear-gradient(135deg, #0891b2, #2563eb);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ─── Components ──────────────────────────────────────────────── */
+@layer components {
+
+  /* ── Buttons ── */
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 px-4 py-2 rounded-lg font-medium text-sm transition-all duration-150 cursor-pointer select-none;
+  }
+  .btn-primary {
+    @apply bg-blue-600 text-white hover:bg-blue-700 active:bg-blue-800 shadow-sm;
+  }
+  .btn-secondary {
+    @apply bg-white text-slate-700 border border-slate-200 hover:bg-slate-50 hover:border-slate-300 shadow-sm;
+  }
+  .btn-ghost {
+    @apply text-slate-600 hover:bg-slate-100 hover:text-slate-900;
+  }
+  .btn-danger {
+    @apply bg-red-600 text-white hover:bg-red-700 shadow-sm;
+  }
+  .btn-success {
+    @apply bg-green-600 text-white hover:bg-green-700 shadow-sm;
+  }
+  .btn-sm  { @apply px-3 py-1.5 text-xs rounded-md; }
+  .btn-lg  { @apply px-6 py-2.5 text-base rounded-xl; }
+  .btn-disabled { @apply opacity-50 cursor-not-allowed pointer-events-none; }
+
+  /* ── Cards ── */
+  .card {
+    @apply bg-white rounded-xl border border-slate-200 shadow-sm p-6;
+  }
+  .card-hover {
+    @apply card cursor-pointer hover:shadow-md hover:-translate-y-0.5 transition-all duration-200;
+  }
+  .stat-card {
+    @apply bg-white rounded-xl border border-slate-200 shadow-sm p-5 hover:shadow-md transition-all duration-200;
+  }
+
+  /* ── Inputs ── */
+  .input {
+    @apply w-full px-3 py-2.5 bg-white border border-slate-200 rounded-lg text-sm text-slate-900 placeholder-slate-400 outline-none transition-all duration-150 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/10;
+  }
+  .label {
+    @apply block text-sm font-medium text-slate-700 mb-1.5;
+  }
+  .select {
+    @apply input appearance-none cursor-pointer;
+  }
+  .textarea {
+    @apply input resize-none;
+  }
+
+  /* ── Badges ── */
+  .badge {
+    @apply inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium;
+  }
+  .badge-primary  { @apply bg-blue-50 text-blue-700 border border-blue-100; }
+  .badge-success  { @apply bg-green-50 text-green-700 border border-green-100; }
+  .badge-warning  { @apply bg-amber-50 text-amber-700 border border-amber-100; }
+  .badge-danger   { @apply bg-red-50 text-red-700 border border-red-100; }
+  .badge-gray     { @apply bg-slate-100 text-slate-600; }
+  .badge-info     { @apply bg-blue-50 text-blue-600 border border-blue-100; }
+  .badge-purple   { @apply bg-purple-50 text-purple-700 border border-purple-100; }
+
+  /* ── Status dots ── */
+  .status-dot { @apply w-2 h-2 rounded-full inline-block; }
+  .status-connected { @apply bg-green-500; }
+  .status-expired   { @apply bg-amber-500; }
+  .status-error     { @apply bg-red-500; }
+  .status-pending   { @apply bg-blue-500; }
+
+  /* ── Sidebar ── */
+  .nav-item {
+    @apply flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm font-medium transition-all duration-150 cursor-pointer;
+  }
+  .nav-item-active {
+    @apply bg-blue-50 text-blue-700;
+  }
+  .nav-item-inactive {
+    @apply text-slate-600 hover:bg-slate-100 hover:text-slate-900;
+  }
+
+  /* ── Page layout ── */
+  .page-header   { @apply mb-6; }
+  .page-title    { @apply text-xl font-semibold text-slate-900; }
+  .page-subtitle { @apply text-sm text-slate-500 mt-0.5; }
+  .section-title { @apply text-base font-semibold text-slate-900; }
+
+  /* ── Divider ── */
+  .divider {
+    @apply flex items-center gap-3 text-sm text-slate-400;
+  }
+  .divider::before, .divider::after {
+    content: '';
+    @apply flex-1 h-px bg-slate-200;
+  }
+
+  /* ── Platform tags ── */
+  .platform-tiktok    { @apply bg-black text-white; }
+  .platform-youtube   { @apply bg-red-600 text-white; }
+  .platform-x         { @apply bg-black text-white; }
+  .platform-instagram { background: linear-gradient(135deg,#833ab4,#fd1d1d,#fcb045); color:white; }
+  .platform-facebook  { @apply bg-blue-600 text-white; }
+  .platform-linkedin  { @apply bg-blue-700 text-white; }
+
+  /* Dark mode overrides for cards/inputs */
+  .dark .card        { @apply bg-slate-800 border-slate-700; }
+  .dark .stat-card   { @apply bg-slate-800 border-slate-700; }
+  .dark .input       { @apply bg-slate-800 border-slate-700 text-white placeholder-slate-500 focus:border-blue-500; }
+  .dark .btn-secondary { @apply bg-slate-800 text-slate-200 border-slate-700 hover:bg-slate-700; }
+  .dark .nav-item-inactive { @apply text-slate-400 hover:bg-slate-700/50 hover:text-white; }
+  .dark .nav-item-active   { @apply bg-blue-600/20 text-blue-400; }
+  .dark .page-title        { @apply text-white; }
+  .dark .page-subtitle     { @apply text-slate-400; }
+  .dark .section-title     { @apply text-white; }
+}
+
+/* ─── Auth page background ───────────────────────────────────── */
+.auth-bg {
+  background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 50%, #f0fdf4 100%);
+}
+.dark .auth-bg {
+  background: linear-gradient(135deg, #0f1117 0%, #1a1f2e 50%, #0f2027 100%);
+}
+
+/* ─── Accessibility ───────────────────────────────────────────── */
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0;
+  margin: -1px; overflow: hidden; clip: rect(0,0,0,0);
+  white-space: nowrap; border-width: 0;
+}
+:focus-visible { outline: 2px solid #2563eb; outline-offset: 2px; }
+
+/* ─── Recharts light theme ────────────────────────────────────── */
+.recharts-tooltip-wrapper { outline: none !important; }
+.recharts-default-tooltip {
+  background: white !important;
+  border: 1px solid #e2e8f0 !important;
+  border-radius: 8px !important;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.08) !important;
+  color: #0f172a !important;
+}
+.recharts-default-tooltip .recharts-tooltip-label {
+  color: #64748b !important;
+  font-size: 12px !important;
+  font-weight: 500 !important;
+}
+
+/* ─── Legacy dark theme compat (for dark mode pages) ─────────── */
+.bg-dark-card    { background: var(--bg-card); }
+.bg-dark-bg      { background: var(--bg-primary); }
+.bg-dark-surface { background: var(--bg-secondary); }
+.bg-dark-base    { background: var(--bg-primary); }
+.bg-dark-hover   { background: var(--bg-elevated); }
+.border-dark-border { border-color: var(--border); }
+.text-accent-primary { color: var(--accent-blue, #2563eb); }
