@@ -191,9 +191,9 @@ export default function Header({ onToggleSidebar }) {
               </Link>
               <div className="border-t border-stone-200 mt-1 pt-1">
                 <button
-                  onClick={async () => {
+                  onClick={() => {
                     setShowMenu(false);
-                    await logout();
+                    logout();
                     navigate('/home');
                   }}
                   className="flex items-center gap-2.5 px-4 py-2.5 text-sm text-red-500 hover:bg-red-50 w-full"

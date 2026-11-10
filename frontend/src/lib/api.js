@@ -25,8 +25,12 @@ api.interceptors.response.use(
   (response) => response,
   (error) => {
     if (error.response?.status === 401) {
-      useAuthStore.getState().logout();
-      window.location.href = '/login';
+      // Only auto-logout on 401 if the user was actually logged in
+      const { isAuthenticated } = useAuthStore.getState();
+      if (isAuthenticated) {
+        useAuthStore.getState().logout();
+        window.location.href = '/home';
+      }
     }
     return Promise.reject(error);
   }
