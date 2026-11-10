@@ -184,14 +184,6 @@ router.post('/logout', authenticate, (req, res) => {
   res.json({ message: 'Logged out successfully' });
 });
 
-module.exports = router;
-
-// ─── POST /api/auth/logout ────────────────────────────────
-router.post('/logout', authenticate, (req, res) => {
-  res.clearCookie('access_token');
-  res.json({ message: 'Logged out successfully' });
-});
-
 // ─── GET /api/auth/google ─────────────────────────────────
 // Initiate Google OAuth for user authentication
 router.get('/google', (req, res) => {
