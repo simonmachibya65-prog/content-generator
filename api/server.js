@@ -70,7 +70,11 @@ app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 app.use(cookieParser());
 
 // ─── Static Files ─────────────────────────────────────────────────────────────
-app.use('/uploads', express.static(path.join(__dirname, '../uploads')));
+// Note: On Vercel serverless, file uploads should use external storage (S3, etc.)
+// Static file serving is disabled in serverless environments
+if (!process.env.VERCEL) {
+  app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+}
 
 // ─── Routes ──────────────────────────────────────────────────────────────────
 app.use('/api/auth', authRoutes);
