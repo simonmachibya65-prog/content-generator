@@ -1,11 +1,14 @@
 const winston = require('winston');
 const path = require('path');
+const fs = require('fs');
 
+// On Vercel (read-only fs), skip file logging and use console only
+const isVercel = !!process.env.VERCEL;
 const logDir = path.join(__dirname, '../../logs');
 
-// Ensure log directory exists
-const fs = require('fs');
-if (!fs.existsSync(logDir)) fs.mkdirSync(logDir, { recursive: true });
+if (!isVercel) {
+  try { if (!fs.existsSync(logDir)) fs.mkdirSync(logDir, { recursive: true }); } catch(e) {}
+}
 
 const logger = winston.createLogger({
   level: process.env.NODE_ENV === 'production' ? 'info' : 'debug',
@@ -14,13 +17,15 @@ const logger = winston.createLogger({
     winston.format.errors({ stack: true }),
     winston.format.json()
   ),
-  transports: [
-    new winston.transports.File({ filename: path.join(logDir, 'error.log'), level: 'error' }),
-    new winston.transports.File({ filename: path.join(logDir, 'combined.log') })
-  ]
+  transports: isVercel
+    ? [ new winston.transports.Console() ]
+    : [
+        new winston.transports.File({ filename: path.join(logDir, 'error.log'), level: 'error' }),
+        new winston.transports.File({ filename: path.join(logDir, 'combined.log') })
+      ]
 });
 
-if (process.env.NODE_ENV !== 'production') {
+if (!isVercel && process.env.NODE_ENV !== 'production') {
   logger.add(new winston.transports.Console({
     format: winston.format.combine(
       winston.format.colorize(),
