@@ -46,7 +46,7 @@ const FEATURES = [
     desc: 'Schedule your content to TikTok, YouTube, Instagram, Facebook, X, and LinkedIn — all from one dashboard. Auto-publish or get a notification. Never miss a day.',
     bullets: ['Recurring posting times per channel', 'Drag & drop calendar', 'Auto-publish or notification mode', 'Bulk scheduling & CSV import'],
     link: '/register',
-    preview: <PublishPreview />,
+    previewId: 'publish',
   },
   {
     id: 'create',
@@ -60,7 +60,7 @@ const FEATURES = [
     desc: 'AI generates images, videos, voiceovers, and copy tailored to each platform. One brief — content for every channel. Organize ideas on a kanban board.',
     bullets: ['AI text, image & video generation', 'Kanban idea board', 'Import from Google Drive, Dropbox, Canva', 'Content templates library'],
     link: '/register',
-    preview: <CreatePreview />,
+    previewId: 'create',
   },
   {
     id: 'community',
@@ -74,7 +74,7 @@ const FEATURES = [
     desc: 'Manage every comment and message from all platforms in one calm, focused inbox. AI suggests replies in your voice. Never ghost your audience.',
     bullets: ['Unified comment inbox', 'AI reply suggestions', 'Saved reply templates', 'Comment score & engagement tracking'],
     link: '/register',
-    preview: <CommunityPreview />,
+    previewId: 'community',
   },
   {
     id: 'insights',
@@ -85,10 +85,10 @@ const FEATURES = [
     textColor: 'text-blue-600',
     borderColor: 'border-blue-100',
     headline: 'Answers, not just analytics',
-    desc: 'Plain-language takeaways tell you what\'s working and what to try next. See every channel at a glance. Export polished reports for clients.',
+    desc: "Plain-language takeaways tell you what's working and what to try next. See every channel at a glance. Export polished reports for clients.",
     bullets: ['Plain-language AI takeaways', 'Cross-channel performance', 'Follower growth & engagement', 'PDF/CSV export for clients'],
     link: '/register',
-    preview: <InsightsPreview />,
+    previewId: 'insights',
   },
 ];
 
@@ -346,7 +346,10 @@ export default function Landing() {
                 </div>
                 {/* Right — preview */}
                 <div className="rounded-2xl overflow-hidden shadow-xl border border-stone-100">
-                  {f.preview}
+                  {f.previewId === 'publish'   && <PublishPreview />}
+                  {f.previewId === 'create'    && <CreatePreview />}
+                  {f.previewId === 'community' && <CommunityPreview />}
+                  {f.previewId === 'insights'  && <InsightsPreview />}
                 </div>
               </div>
             );
