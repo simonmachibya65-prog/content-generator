@@ -1,3 +1,3 @@
-// Vercel Serverless Function — exposes the Express backend under /api/*
-const app = require('../backend/src/server.js');
+// Vercel Serverless entry point
+const app = require('./server.js');
 module.exports = app;
