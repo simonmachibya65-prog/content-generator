@@ -5,8 +5,16 @@ import { Users, Send, Target, Zap, ArrowRight, Eye, Heart, MessageCircle, Share2
 import { useAuthStore } from '../store/authStore';
 import { AreaChart, Area, XAxis, Tooltip, ResponsiveContainer } from 'recharts';
 import GaugeChart from '../components/GaugeChart';
+import { FaTiktok, FaYoutube, FaXTwitter, FaInstagram, FaFacebookF, FaLinkedinIn } from 'react-icons/fa6';
 
-const PLATFORM_ICONS = { tiktok:'🎵', youtube:'▶️', x:'𝕏', instagram:'📸', facebook:'📘', linkedin:'💼' };
+const PLATFORM_ICONS = {
+  tiktok:    { Icon: FaTiktok,     color: '#000000' },
+  youtube:   { Icon: FaYoutube,    color: '#FF0000' },
+  x:         { Icon: FaXTwitter,   color: '#000000' },
+  instagram: { Icon: FaInstagram,  color: '#E4405F' },
+  facebook:  { Icon: FaFacebookF,  color: '#1877F2' },
+  linkedin:  { Icon: FaLinkedinIn, color: '#0A66C2' },
+};
 
 export default function Dashboard() {
   const { user } = useAuthStore();
@@ -200,8 +208,13 @@ export default function Dashboard() {
               <div className="space-y-3 flex-1">
                 {connectedAccounts.slice(0, 5).map((acc) => (
                   <div key={acc.id} className="flex items-center gap-3 p-2.5 rounded-xl hover:bg-stone-50 transition-colors">
-                    <div className="w-9 h-9 rounded-xl flex items-center justify-center text-lg bg-stone-50 border border-stone-200">
-                      {PLATFORM_ICONS[acc.platform_name] || '📱'}
+                    <div className="w-9 h-9 rounded-xl flex items-center justify-center bg-stone-50 border border-stone-200">
+                      {(() => {
+                        const p = PLATFORM_ICONS[acc.platform_name];
+                        if (!p) return <span className="text-sm">📱</span>;
+                        const { Icon, color } = p;
+                        return <Icon className="w-5 h-5" style={{ color }} />;
+                      })()}
                     </div>
                     <div className="flex-1 min-w-0">
                       <p className="text-sm font-semibold text-stone-900 truncate">{acc.display_name || acc.username}</p>

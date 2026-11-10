@@ -10,15 +10,16 @@ import { useState } from 'react';
 import { useQuery, useMutation, useQueryClient } from 'react-query';
 import api from '../lib/api';
 import toast from 'react-hot-toast';
-import {
-  Bot, Zap, Play, Pause, GitBranch, Plus, Loader2,
-  Clock, TrendingUp, Webhook, Rss, ArrowRight, CheckCircle2,
-  Settings2, AlertCircle, Activity, History
-} from 'lucide-react';
-import { useAuthStore } from '../store/authStore';
+import { FaTiktok, FaYoutube, FaXTwitter, FaInstagram, FaFacebookF, FaLinkedinIn } from 'react-icons/fa6';
 
-// ── shared helpers ────────────────────────────────────────────
-const PLATFORM_ICONS = { tiktok:'🎵', youtube:'▶️', x:'𝕏', instagram:'📸', facebook:'📘', linkedin:'💼' };
+const PLATFORM_ICONS = {
+  tiktok:    { Icon: FaTiktok,     color: '#000000' },
+  youtube:   { Icon: FaYoutube,    color: '#FF0000' },
+  x:         { Icon: FaXTwitter,   color: '#000000' },
+  instagram: { Icon: FaInstagram,  color: '#E4405F' },
+  facebook:  { Icon: FaFacebookF,  color: '#1877F2' },
+  linkedin:  { Icon: FaLinkedinIn, color: '#0A66C2' },
+};
 
 const TRIGGER_TYPES = [
   { id: 'schedule',    label: 'Schedule',    icon: Clock,      desc: 'Run at specific times',    color: 'text-blue-400',   bg: 'bg-blue-500/10' },

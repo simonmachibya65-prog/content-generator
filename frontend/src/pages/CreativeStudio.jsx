@@ -10,6 +10,7 @@ import {
   Film, Layout, FileText, Globe, Target, Clock, ChevronDown,
   CheckCircle2, AlertCircle, Wand2
 } from 'lucide-react';
+import { FaTiktok, FaYoutube, FaXTwitter, FaInstagram, FaFacebookF, FaLinkedinIn } from 'react-icons/fa6';
 
 // ─── CATEGORY DEFINITIONS ─────────────────────────────────────
 const CATEGORIES = [
@@ -23,12 +24,12 @@ const CATEGORIES = [
 ];
 
 const PLATFORMS = [
-  { id: 'instagram', label: 'Instagram', icon: '📸' },
-  { id: 'tiktok', label: 'TikTok', icon: '🎵' },
-  { id: 'youtube', label: 'YouTube', icon: '▶️' },
-  { id: 'facebook', label: 'Facebook', icon: '📘' },
-  { id: 'x', label: 'X', icon: '𝕏' },
-  { id: 'linkedin', label: 'LinkedIn', icon: '💼' }
+  { id: 'instagram', label: 'Instagram', Icon: FaInstagram,  color: '#E4405F' },
+  { id: 'tiktok',    label: 'TikTok',    Icon: FaTiktok,     color: '#000000' },
+  { id: 'youtube',   label: 'YouTube',   Icon: FaYoutube,    color: '#FF0000' },
+  { id: 'facebook',   label: 'Facebook',  Icon: FaFacebookF,  color: '#1877F2' },
+  { id: 'x',         label: 'X',         Icon: FaXTwitter,    color: '#000000' },
+  { id: 'linkedin',  label: 'LinkedIn',  Icon: FaLinkedinIn, color: '#0A66C2' }
 ];
 
 const OBJECTIVES = [

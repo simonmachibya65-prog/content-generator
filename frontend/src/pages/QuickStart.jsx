@@ -4,14 +4,15 @@ import { useMutation } from 'react-query';
 import api from '../lib/api';
 import toast from 'react-hot-toast';
 import { Sparkles, Zap, CheckCircle2, ArrowRight, ArrowLeft, Loader2, Target, Clock, Globe } from 'lucide-react';
+import { FaTiktok, FaYoutube, FaXTwitter, FaInstagram, FaFacebookF, FaLinkedinIn } from 'react-icons/fa6';
 
 const PLATFORMS = [
-  { id: 'tiktok',    name: 'TikTok',    icon: '🎵', bg: 'bg-black' },
-  { id: 'youtube',   name: 'YouTube',   icon: '▶️', bg: 'bg-red-600' },
-  { id: 'x',         name: 'X',         icon: '𝕏',  bg: 'bg-zinc-900' },
-  { id: 'instagram', name: 'Instagram', icon: '📸', bg: 'bg-gradient-to-br from-purple-500 via-pink-500 to-orange-400' },
-  { id: 'facebook',  name: 'Facebook',  icon: '📘', bg: 'bg-blue-600' },
-  { id: 'linkedin',  name: 'LinkedIn',  icon: '💼', bg: 'bg-blue-700' }
+  { id: 'tiktok',    name: 'TikTok',    Icon: FaTiktok,     color: '#000000' },
+  { id: 'youtube',   name: 'YouTube',   Icon: FaYoutube,    color: '#FF0000' },
+  { id: 'x',         name: 'X',         Icon: FaXTwitter,    color: '#000000' },
+  { id: 'instagram', name: 'Instagram', Icon: FaInstagram,   color: '#E4405F' },
+  { id: 'facebook',  name: 'Facebook',  Icon: FaFacebookF,   color: '#1877F2' },
+  { id: 'linkedin',  name: 'LinkedIn',  Icon: FaLinkedinIn,  color: '#0A66C2' }
 ];
 
 const TONES = [
@@ -135,8 +136,8 @@ export default function QuickStart() {
                       ${isSel ? 'border-indigo-500 bg-indigo-50 scale-[1.02]' : 'border-gray-100 hover:border-gray-200 hover:bg-gray-50'}`}
                   >
                     {isSel && <CheckCircle2 size={18} className="absolute top-3 right-3 text-indigo-500" />}
-                    <div className={`w-12 h-12 ${p.bg} rounded-xl flex items-center justify-center text-2xl mx-auto mb-2`}>
-                      {p.icon}
+                    <div className="w-12 h-12 rounded-xl flex items-center justify-center mx-auto mb-2 bg-stone-50 border border-stone-200">
+                      <p.Icon className="w-6 h-6" style={{ color: p.color }} />
                     </div>
                     <p className="font-semibold text-sm text-gray-800">{p.name}</p>
                   </button>

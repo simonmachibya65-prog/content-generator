@@ -6,14 +6,15 @@ import {
   Trash2, RefreshCw, CheckCircle2, Clock, AlertCircle, Link2,
   Plus, Search, Sparkles, Loader2, ShieldAlert, ShieldCheck, Wifi, WifiOff
 } from 'lucide-react';
+import { FaTiktok, FaYoutube, FaXTwitter, FaInstagram, FaFacebookF, FaLinkedinIn } from 'react-icons/fa6';
 
 const PLATFORMS = [
-  { id: 'tiktok',    name: 'TikTok',    icon: '🎵', bg: 'bg-black',          desc: 'Videos and photo posts' },
-  { id: 'youtube',   name: 'YouTube',   icon: '▶️', bg: 'bg-red-600',        desc: 'Videos and Shorts' },
-  { id: 'x',         name: 'X',         icon: '𝕏',  bg: 'bg-zinc-900',        desc: 'Text, images and videos' },
-  { id: 'instagram', name: 'Instagram', icon: '📸', bg: 'bg-gradient-to-br from-purple-500 via-pink-500 to-orange-400', desc: 'Posts, Reels and Stories' },
-  { id: 'facebook',  name: 'Facebook',  icon: '📘', bg: 'bg-blue-600',       desc: 'Pages and promotional posts' },
-  { id: 'linkedin',  name: 'LinkedIn',  icon: '💼', bg: 'bg-blue-700',       desc: 'Professional content' }
+  { id: 'tiktok',    name: 'TikTok',    Icon: FaTiktok,     color: '#000000', desc: 'Videos and photo posts' },
+  { id: 'youtube',   name: 'YouTube',   Icon: FaYoutube,    color: '#FF0000', desc: 'Videos and Shorts' },
+  { id: 'x',         name: 'X',         Icon: FaXTwitter,    color: '#000000', desc: 'Text, images and videos' },
+  { id: 'instagram', name: 'Instagram', Icon: FaInstagram,   color: '#E4405F', desc: 'Posts, Reels and Stories' },
+  { id: 'facebook',  name: 'Facebook',  Icon: FaFacebookF,   color: '#1877F2', desc: 'Pages and promotional posts' },
+  { id: 'linkedin',  name: 'LinkedIn',  Icon: FaLinkedinIn,  color: '#0A66C2', desc: 'Professional content' }
 ];
 
 function TokenHealthBadge({ health }) {
@@ -224,8 +225,8 @@ export default function SocialAccounts() {
               <div key={p.id} className={`card animate-fade-in-up stagger-${Math.min(i+1, 4)}`}>
                 <div className="flex items-center justify-between mb-4">
                   <div className="flex items-center gap-3">
-                    <div className={`w-11 h-11 ${p.bg} rounded-xl flex items-center justify-center text-xl shadow-sm`}>
-                      {p.icon}
+                    <div className="w-11 h-11 rounded-xl flex items-center justify-center shadow-sm bg-stone-50 border border-stone-200">
+                      <p.Icon className="w-6 h-6" style={{ color: p.color }} />
                     </div>
                     <div>
                       <h3 className="font-bold text-white">{p.name}</h3>
@@ -272,8 +273,8 @@ export default function SocialAccounts() {
                           {acc.avatar_url ? (
                             <img src={acc.avatar_url} alt="" className="w-9 h-9 rounded-xl object-cover" />
                           ) : (
-                            <div className={`w-9 h-9 ${p.bg} rounded-xl flex items-center justify-center text-base`}>
-                              {p.icon}
+                            <div className="w-9 h-9 rounded-xl flex items-center justify-center bg-stone-50 border border-stone-200">
+                              <p.Icon className="w-5 h-5" style={{ color: p.color }} />
                             </div>
                           )}
                           <div className="flex-1 min-w-0">

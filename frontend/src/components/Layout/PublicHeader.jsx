@@ -3,9 +3,11 @@ import { Link, useLocation } from 'react-router-dom';
 import { Zap, Menu, X, ChevronRight } from 'lucide-react';
 
 const NAV_LINKS = [
-  { label: 'Features', href: '/home#features' },
-  { label: 'Pricing',  href: '/home#pricing'  },
-  { label: 'How it works', href: '/home#how-it-works' },
+  { label: 'Publish',   href: '/home#publish' },
+  { label: 'Create',    href: '/home#create'  },
+  { label: 'Community', href: '/home#community' },
+  { label: 'Insights',  href: '/home#insights' },
+  { label: 'Pricing',   href: '/home#pricing'  },
 ];
 
 export default function PublicHeader() {

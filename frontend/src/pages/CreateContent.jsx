@@ -6,14 +6,15 @@ import {
   PenTool, Sparkles, Image as ImageIcon, FileText, Video, RefreshCw,
   Hash, Loader2, Copy, Check, Send, Calendar
 } from 'lucide-react';
+import { FaTiktok, FaYoutube, FaXTwitter, FaInstagram, FaFacebookF, FaLinkedinIn } from 'react-icons/fa6';
 
 const PLATFORMS = [
-  { id: 'tiktok',    name: 'TikTok',    icon: '🎵' },
-  { id: 'youtube',   name: 'YouTube',   icon: '▶️' },
-  { id: 'x',         name: 'X',         icon: '𝕏'  },
-  { id: 'instagram', name: 'Instagram', icon: '📸' },
-  { id: 'facebook',  name: 'Facebook',  icon: '📘' },
-  { id: 'linkedin',  name: 'LinkedIn',  icon: '💼' }
+  { id: 'tiktok',    name: 'TikTok',    Icon: FaTiktok,     color: '#000' },
+  { id: 'youtube',   name: 'YouTube',   Icon: FaYoutube,    color: '#FF0000' },
+  { id: 'x',         name: 'X',         Icon: FaXTwitter,    color: '#000' },
+  { id: 'instagram', name: 'Instagram', Icon: FaInstagram,   color: '#E4405F' },
+  { id: 'facebook',  name: 'Facebook',  Icon: FaFacebookF,   color: '#1877F2' },
+  { id: 'linkedin',  name: 'LinkedIn',  Icon: FaLinkedinIn,  color: '#0A66C2' }
 ];
 
 const TOOLS = [
