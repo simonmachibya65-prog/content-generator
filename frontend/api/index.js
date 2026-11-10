@@ -1,11 +1,15 @@
-// Absolute minimal — no dependencies at all
-module.exports = (req, res) => {
-  res.setHeader('Content-Type', 'application/json');
-  res.end(JSON.stringify({ 
-    ok: true, 
-    url: req.url,
-    node: process.version,
-    cwd: process.cwd(),
-    env: process.env.NODE_ENV
-  }));
-};
+process.on('uncaughtException', function(err) {
+  console.error('UNCAUGHT:', err.message, err.stack);
+});
+
+try {
+  module.exports = function(req, res) {
+    res.setHeader('Content-Type', 'application/json');
+    res.end(JSON.stringify({ ok: true, v: process.version }));
+  };
+} catch(e) {
+  module.exports = function(req, res) {
+    res.setHeader('Content-Type', 'application/json');
+    res.end(JSON.stringify({ error: e.message }));
+  };
+}
