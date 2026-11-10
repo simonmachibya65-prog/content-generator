@@ -60,7 +60,7 @@ export default function Login() {
     try {
       await login(formData.email, formData.password);
       showToast.success('Welcome back! 👋');
-      navigate('/');
+      navigate('/dashboard');
     } catch (err) {
       showToast.error(err.response?.data?.error || 'Login failed');
     } finally {
@@ -74,7 +74,7 @@ export default function Login() {
       <div className="hidden lg:flex lg:w-[45%] flex-col justify-center p-12 bg-gradient-to-br from-green-50 via-stone-50 to-emerald-50">
         <div className="max-w-md">
           {/* Logo */}
-          <Link to="/home" className="flex items-center gap-2.5 mb-10">
+          <Link to="/" className="flex items-center gap-2.5 mb-10">
             <div className="w-10 h-10 bg-gradient-to-br from-green-500 to-emerald-600 rounded-xl flex items-center justify-center shadow-sm">
               <Zap size={20} className="text-white" strokeWidth={2.5} />
             </div>
@@ -109,7 +109,7 @@ export default function Login() {
         <div className="w-full max-w-[400px]">
           {/* Mobile logo */}
           <div className="lg:hidden flex items-center gap-2.5 mb-8 justify-center">
-            <Link to="/home" className="flex items-center gap-2.5">
+            <Link to="/" className="flex items-center gap-2.5">
               <div className="w-10 h-10 bg-gradient-to-br from-green-500 to-emerald-600 rounded-xl flex items-center justify-center">
                 <Zap size={20} className="text-white" strokeWidth={2.5} />
               </div>

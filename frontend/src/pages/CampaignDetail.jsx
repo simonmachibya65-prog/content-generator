@@ -108,7 +108,7 @@ const CampaignDetail = () => {
   const handleDeleteCampaign = async () => {
     try {
       await api.delete(`/advertising/campaigns/${id}`);
-      navigate('/advertising');
+      navigate('/dashboard/advertising');
     } catch (error) {
       console.error('Failed to delete campaign:', error);
       alert('Failed to delete campaign');

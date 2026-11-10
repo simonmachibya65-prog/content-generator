@@ -41,7 +41,7 @@ export default function GoogleAuthSuccess() {
           navigate('/quick-start');
         } else {
           // Existing user - go to dashboard
-          navigate('/');
+          navigate('/dashboard');
         }
       } catch (err) {
         toast.error('Failed to complete authentication');

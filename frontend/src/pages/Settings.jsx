@@ -233,7 +233,7 @@ export default function Settings() {
               <p className="font-semibold text-sm text-white">Sign Out</p>
               <p className="text-xs text-gray-500">Sign out of your account</p>
             </div>
-            <button onClick={() => { logout(); navigate('/home'); }} className="btn btn-secondary btn-sm">
+            <button onClick={() => { logout(); navigate('/'); }} className="btn btn-secondary btn-sm">
               <LogOut size={14} /> Sign Out
             </button>
           </div>

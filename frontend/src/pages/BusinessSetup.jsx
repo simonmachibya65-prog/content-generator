@@ -88,7 +88,7 @@ export default function BusinessSetup() {
         api.post('/business/brand-intelligence').then(() => {
           toast.success('Brand intelligence ready! 🧠');
         });
-        navigate('/ai-intelligence');
+        navigate('/dashboard/ai-intelligence');
       },
       onError: (err) => toast.error(err.response?.data?.error || 'Failed to save')
     }
@@ -554,7 +554,7 @@ export default function BusinessSetup() {
               <ArrowLeft size={16} /> Back
             </button>
           ) : (
-            <button onClick={() => navigate('/')} className="btn btn-secondary">Skip for now</button>
+            <button onClick={() => navigate('/dashboard')} className="btn btn-secondary">Skip for now</button>
           )}
 
           <button

@@ -73,11 +73,11 @@ export default function QuickStart() {
   }, {
     onSuccess: () => {
       toast.success('🎉 Automation activated!');
-      setTimeout(() => navigate('/'), 1500);
+      setTimeout(() => navigate('/dashboard'), 1500);
     },
     onError: () => {
       toast.error('Failed to create campaign');
-      navigate('/campaigns');
+      navigate('/dashboard/advertising');
     }
   });
 

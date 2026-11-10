@@ -69,7 +69,7 @@ const Advertising = () => {
   };
 
   const handleCreateCampaign = () => {
-    navigate('/advertising/create');
+    navigate('/dashboard/advertising/create');
   };
 
   const handleCampaignClick = (campaignId) => {
@@ -194,7 +194,7 @@ const Advertising = () => {
           <div className="flex items-center justify-between mb-4">
             <h2 className="text-lg font-semibold text-white">Monthly Budget</h2>
             <button
-              onClick={() => navigate('/advertising/budget')}
+              onClick={() => navigate('/dashboard/advertising/budget')}
               className="text-sm text-accent-primary hover:text-accent-primary/80"
             >
               Manage Budget

@@ -75,7 +75,7 @@ export default function Header({ onToggleSidebar }) {
 
       {/* Create button — Buffer style blue + New */}
       <button
-        onClick={() => navigate('/create')}
+        onClick={() => navigate('/dashboard/create')}
         className="hidden sm:flex items-center gap-1.5 px-3.5 py-2 bg-green-600 text-white rounded-lg font-medium text-sm hover:bg-green-700 transition-colors"
       >
         <Plus size={16} />
@@ -194,7 +194,7 @@ export default function Header({ onToggleSidebar }) {
                   onClick={() => {
                     setShowMenu(false);
                     logout();
-                    navigate('/home');
+                    navigate('/');
                   }}
                   className="flex items-center gap-2.5 px-4 py-2.5 text-sm text-red-500 hover:bg-red-50 w-full"
                 >

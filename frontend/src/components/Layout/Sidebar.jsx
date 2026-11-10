@@ -12,38 +12,38 @@ const NAV_SECTIONS = [
   {
     label: 'Main',
     items: [
-      { icon: LayoutDashboard, label: 'Dashboard',       path: '/' },
-      { icon: Calendar,        label: 'Content Planner', path: '/planner' },
+      { icon: LayoutDashboard, label: 'Dashboard',       path: '/dashboard' },
+      { icon: Calendar,        label: 'Content Planner', path: '/dashboard/planner' },
     ]
   },
   {
     label: 'Create',
     items: [
-      { icon: Sparkles,  label: 'Creative Studio', path: '/creative-studio' },
-      { icon: Megaphone, label: 'Advertising',     path: '/advertising' },
+      { icon: Sparkles,  label: 'Creative Studio', path: '/dashboard/creative-studio' },
+      { icon: Megaphone, label: 'Advertising',     path: '/dashboard/advertising' },
     ]
   },
   {
     label: 'Engage',
     items: [
-      { icon: Bot, label: 'AI Intelligence', path: '/ai-intelligence' },
-      { icon: Inbox, label: 'Community',      path: '/social' },
+      { icon: Bot, label: 'AI Intelligence', path: '/dashboard/ai-intelligence' },
+      { icon: Inbox, label: 'Community',      path: '/dashboard/social' },
     ]
   },
   {
     label: 'Growth',
     items: [
-      { icon: BarChart3, label: 'Analytics', path: '/analytics' },
-      { icon: BookUser,  label: 'Audience',  path: '/audience', badge: 'New' },
+      { icon: BarChart3, label: 'Analytics', path: '/dashboard/analytics' },
+      { icon: BookUser,  label: 'Audience',  path: '/dashboard/audience', badge: 'New' },
     ]
   },
   {
     label: 'Operations',
     items: [
-      { icon: Workflow,     label: 'Automation',    path: '/automation' },
-      { icon: Library,      label: 'Media Library', path: '/media' },
-      { icon: Users,        label: 'Team',          path: '/team' },
-      { icon: CheckSquare,  label: 'Approvals',     path: '/approvals' },
+      { icon: Workflow,     label: 'Automation',    path: '/dashboard/automation' },
+      { icon: Library,      label: 'Media Library', path: '/dashboard/media' },
+      { icon: Users,        label: 'Team',          path: '/dashboard/team' },
+      { icon: CheckSquare,  label: 'Approvals',     path: '/dashboard/approvals' },
     ]
   },
 ];
@@ -171,7 +171,7 @@ export default function Sidebar({ collapsed, onToggle }) {
           </div>
           {user.plan === 'free' && (
             <Link
-              to="/settings/billing"
+              to="/dashboard/settings/billing"
               className="mt-2 text-[11px] text-green-600 hover:text-green-700 font-medium flex items-center gap-1"
             >
               <Zap size={10} /> Upgrade for more
@@ -183,8 +183,8 @@ export default function Sidebar({ collapsed, onToggle }) {
       {/* ── Bottom Links ──────────────────── */}
       <div className="px-3 pb-4 border-t border-stone-200 pt-3 space-y-0.5">
         {[
-          { icon: Settings,   label: 'Settings',     path: '/settings' },
-          { icon: HelpCircle, label: 'Help & Support', path: '/help' },
+          { icon: Settings,   label: 'Settings',     path: '/dashboard/settings' },
+          { icon: HelpCircle, label: 'Help & Support', path: '/dashboard/help' },
         ].map(({ icon: Icon, label, path }) => {
           const active = isActive(path);
           return (

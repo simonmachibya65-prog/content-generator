@@ -52,12 +52,12 @@ import PublicLayout from './components/Layout/PublicLayout';
 import Landing from './pages/Landing';
 
 /**
- * ProtectedRoute — redirects guests to the landing page instead of /login
- * so visitors see the marketing site first.
+ * ProtectedRoute — redirects guests to the landing page,
+ * and when used, authenticated users can access protected content.
  */
 function ProtectedRoute({ children }) {
   const { isAuthenticated } = useAuthStore();
-  return isAuthenticated ? children : <Navigate to="/home" />;
+  return isAuthenticated ? children : <Navigate to="/" />;
 }
 
 export default function App() {
@@ -66,7 +66,7 @@ export default function App() {
 
       {/* ── Public pages (header navbar, no sidebar) ────────── */}
       <Route element={<PublicLayout />}>
-        <Route path="/home"     element={<Landing />} />
+        <Route path="/"         element={<Landing />} />
         <Route path="/login"    element={<Login />} />
         <Route path="/register" element={<Register />} />
       </Route>
@@ -83,8 +83,8 @@ export default function App() {
       } />
 
       {/* ── Main dashboard (with sidebar) ────────────────────── */}
-      {/* Guests hitting "/" get redirected to "/home" (landing page) */}
-      <Route path="/" element={
+      {/* Authenticated users hitting "/" get redirected to "/dashboard" */}
+      <Route path="/dashboard" element={
         <ProtectedRoute><MainLayout /></ProtectedRoute>
       }>
         {/* Dashboard */}
@@ -129,11 +129,11 @@ export default function App() {
         <Route path="help"                           element={<Help />} />
 
         {/* Legacy redirects — keep old URLs working */}
-        <Route path="calendar"   element={<Navigate to="/planner"    replace />} />
-        <Route path="queue"      element={<Navigate to="/planner"    replace />} />
-        <Route path="autopilot"  element={<Navigate to="/automation" replace />} />
-        <Route path="workflows"  element={<Navigate to="/automation" replace />} />
-        <Route path="campaigns"  element={<Navigate to="/advertising" replace />} />
+        <Route path="calendar"   element={<Navigate to="/dashboard/planner"    replace />} />
+        <Route path="queue"      element={<Navigate to="/dashboard/planner"    replace />} />
+        <Route path="autopilot"  element={<Navigate to="/dashboard/automation" replace />} />
+        <Route path="workflows"  element={<Navigate to="/dashboard/automation" replace />} />
+        <Route path="campaigns"  element={<Navigate to="/dashboard/advertising" replace />} />
       </Route>
 
       {/* ── Admin (separate layout) ──────────────────────────── */}
@@ -148,8 +148,8 @@ export default function App() {
         <Route path="system"        element={<AdminSystem />} />
       </Route>
 
-      {/* ── Catch-all → redirect to home ──────────────────────── */}
-      <Route path="*" element={<Navigate to="/home" replace />} />
+      {/* ── Catch-all → redirect to landing ──────────────────────── */}
+      <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   );
 }

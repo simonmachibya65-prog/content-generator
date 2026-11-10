@@ -3,11 +3,11 @@ import { Link, useLocation } from 'react-router-dom';
 import { Zap, Menu, X, ChevronRight } from 'lucide-react';
 
 const NAV_LINKS = [
-  { label: 'Publish',   href: '/home#publish' },
-  { label: 'Create',    href: '/home#create'  },
-  { label: 'Community', href: '/home#community' },
-  { label: 'Insights',  href: '/home#insights' },
-  { label: 'Pricing',   href: '/home#pricing'  },
+  { label: 'Publish',   href: '/#publish' },
+  { label: 'Create',    href: '/#create'  },
+  { label: 'Community', href: '/#community' },
+  { label: 'Insights',  href: '/#insights' },
+  { label: 'Pricing',   href: '/#pricing'  },
 ];
 
 export default function PublicHeader() {
@@ -42,7 +42,7 @@ export default function PublicHeader() {
           <div className="flex items-center justify-between h-16">
 
             {/* ── Logo ─────────────────────────────────── */}
-            <Link to="/home" className="flex items-center gap-2.5 group flex-shrink-0">
+            <Link to="/" className="flex items-center gap-2.5 group flex-shrink-0">
               <div className="relative">
                 <div className="relative w-9 h-9 bg-gradient-to-br from-green-500 to-emerald-600 rounded-xl flex items-center justify-center shadow-sm group-hover:scale-110 transition-transform duration-300">
                   <Zap size={18} className="text-white" strokeWidth={2.5} />

@@ -114,7 +114,7 @@ const CreateCampaign = () => {
         {/* Header */}
         <div className="mb-8">
           <button
-            onClick={() => navigate('/advertising')}
+            onClick={() => navigate('/dashboard/advertising')}
             className="flex items-center gap-2 text-gray-400 hover:text-white mb-4 transition-colors"
           >
             <ArrowLeftIcon className="w-4 h-4" />

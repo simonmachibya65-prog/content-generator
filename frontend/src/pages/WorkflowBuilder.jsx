@@ -333,7 +333,7 @@ export default function WorkflowBuilder() {
     try {
       await api.post('/automation/workflows', workflowDef);
       toast.success('Workflow saved!');
-      navigate('/automation');
+      navigate('/dashboard/automation');
     } catch (err) {
       toast.error(err.response?.data?.error || 'Failed to save workflow');
     } finally {
