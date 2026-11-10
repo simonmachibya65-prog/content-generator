@@ -9,6 +9,9 @@ const InstagramAdapter = require('../adapters/instagram');
 const FacebookAdapter = require('../adapters/facebook');
 const LinkedInAdapter = require('../adapters/linkedin');
 
+const QualityControlService = require('./qualityControlService');
+const PlatformAdapterService = require('./platformAdapterService');
+
 const ADAPTERS = {
   tiktok:    TikTokAdapter,
   youtube:   YouTubeAdapter,
@@ -125,9 +128,19 @@ const PublishingService = {
 
   /**
    * Schedule publishing jobs for a post across selected accounts
+   * NOW WITH: Publishing Modes (Manual/Approval/Automatic) + Quality Control
    */
-  async schedulePost(postId, socialAccountIds, scheduledAt) {
+  async schedulePost(postId, socialAccountIds, scheduledAt, options = {}) {
     const jobs = [];
+    
+    // Get post details
+    const { rows: postRows } = await query(
+      'SELECT * FROM posts WHERE id = $1',
+      [postId]
+    );
+    if (!postRows[0]) throw new Error('Post not found');
+    const post = postRows[0];
+
     for (const accountId of socialAccountIds) {
       const { rows } = await query(
         'SELECT user_id, platform_name FROM social_accounts WHERE id = $1',
@@ -135,16 +148,99 @@ const PublishingService = {
       );
       if (!rows[0]) continue;
 
+      const { user_id, platform_name } = rows[0];
+
+      // GET PUBLISHING MODE for this account
+      const mode = await this.getPublishingMode(user_id, accountId);
+
+      // RUN QUALITY CONTROL
+      const qualityCheck = await QualityControlService.validateContent(
+        {
+          caption: post.content_text,
+          text: post.content_text,
+          hashtags: post.hashtags,
+          image_url: post.platform_data?.[platform_name]?.image_url,
+          video_url: post.platform_data?.[platform_name]?.video_url,
+          tone: post.tone,
+          language: post.language
+        },
+        platform_name,
+        user_id
+      );
+
+      // Determine initial status based on mode and quality
+      let initialStatus = 'pending';
+      
+      if (!qualityCheck.passed) {
+        initialStatus = 'failed';
+        logger.warn(`Quality check failed for post ${postId} on ${platform_name}`);
+      } else if (mode === 'manual') {
+        initialStatus = 'draft'; // User must manually approve
+      } else if (mode === 'approval') {
+        initialStatus = 'awaiting_approval'; // Requires user approval
+      } else if (mode === 'automatic') {
+        initialStatus = 'pending'; // Auto-publish
+      }
+
+      // Create job with quality report
       const { rows: jobRows } = await query(
         `INSERT INTO publishing_jobs
-           (post_id, social_account_id, user_id, platform_name, status, scheduled_at)
-         VALUES ($1, $2, $3, $4, 'pending', $5)
+           (post_id, social_account_id, user_id, platform_name, status, scheduled_at,
+            quality_score, quality_report, publishing_mode)
+         VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
          RETURNING id`,
-        [postId, accountId, rows[0].user_id, rows[0].platform_name, scheduledAt]
+        [
+          postId, accountId, user_id, platform_name, initialStatus, scheduledAt,
+          qualityCheck.score, JSON.stringify(qualityCheck), mode
+        ]
       );
+
       jobs.push(jobRows[0]);
+
+      // Send notification if approval needed
+      if (initialStatus === 'awaiting_approval') {
+        await this.notifyUser(
+          user_id,
+          'approval_needed',
+          '⏳ Content Ready for Review',
+          `Your ${platform_name} post is ready. Quality score: ${qualityCheck.score}/100. Please review and approve.`
+        );
+      }
     }
+    
     return jobs;
+  },
+
+  /**
+   * GET PUBLISHING MODE for account
+   */
+  async getPublishingMode(userId, socialAccountId) {
+    const { rows } = await query(
+      `SELECT mode FROM publishing_modes 
+       WHERE user_id = $1 AND social_account_id = $2`,
+      [userId, socialAccountId]
+    );
+    
+    return rows[0]?.mode || 'approval'; // Default: approval mode
+  },
+
+  /**
+   * SET PUBLISHING MODE for account
+   */
+  async setPublishingMode(userId, socialAccountId, mode) {
+    if (!['manual', 'approval', 'automatic'].includes(mode)) {
+      throw new Error('Invalid publishing mode. Must be: manual, approval, or automatic');
+    }
+
+    await query(
+      `INSERT INTO publishing_modes (user_id, social_account_id, mode)
+       VALUES ($1, $2, $3)
+       ON CONFLICT (user_id, social_account_id)
+       DO UPDATE SET mode = $3, updated_at = NOW()`,
+      [userId, socialAccountId, mode]
+    );
+
+    logger.info(`Publishing mode set to ${mode} for user ${userId}, account ${socialAccountId}`);
   },
 
   // ─── Execution ──────────────────────────────────────────────

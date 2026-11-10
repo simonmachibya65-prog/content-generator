@@ -179,13 +179,15 @@ export default function Register() {
 
           {/* Mobile logo */}
           <div className="lg:hidden flex items-center gap-2.5 mb-10 justify-center">
-            <div className="relative">
-              <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-[#00d4aa] to-emerald-500 blur-md opacity-40" />
-              <div className="relative w-10 h-10 bg-gradient-to-br from-[#00d4aa] to-emerald-500 rounded-xl flex items-center justify-center shadow-glow-teal-sm">
-                <Zap size={20} className="text-[#0a0d14]" strokeWidth={2.5} />
+            <Link to="/home" className="flex items-center gap-2.5">
+              <div className="relative">
+                <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-[#00d4aa] to-emerald-500 blur-md opacity-40" />
+                <div className="relative w-10 h-10 bg-gradient-to-br from-[#00d4aa] to-emerald-500 rounded-xl flex items-center justify-center shadow-glow-teal-sm">
+                  <Zap size={20} className="text-[#0a0d14]" strokeWidth={2.5} />
+                </div>
               </div>
-            </div>
-            <span className="text-2xl font-black text-white tracking-tight">Publift</span>
+              <span className="text-2xl font-black text-white tracking-tight">Publift</span>
+            </Link>
           </div>
 
           {/* Heading */}

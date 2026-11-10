@@ -3,9 +3,9 @@ import { Link, useLocation } from 'react-router-dom';
 import { Zap, Menu, X, ChevronRight } from 'lucide-react';
 
 const NAV_LINKS = [
-  { label: 'Features', href: '#features' },
-  { label: 'Pricing',  href: '#pricing'  },
-  { label: 'About',    href: '#about'    },
+  { label: 'Features', href: '/home#features' },
+  { label: 'Pricing',  href: '/home#pricing'  },
+  { label: 'About',    href: '/home#how-it-works' },
 ];
 
 export default function PublicHeader() {
@@ -45,7 +45,7 @@ export default function PublicHeader() {
           <div className="flex items-center justify-between h-16">
 
             {/* ── Logo ─────────────────────────────────── */}
-            <Link to="/" className="flex items-center gap-2.5 group flex-shrink-0">
+            <Link to="/home" className="flex items-center gap-2.5 group flex-shrink-0">
               <div className="relative">
                 {/* Glow ring */}
                 <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-[#00d4aa] to-emerald-500 blur-md opacity-40 group-hover:opacity-70 transition-opacity duration-300" />

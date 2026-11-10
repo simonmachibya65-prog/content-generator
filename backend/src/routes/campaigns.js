@@ -3,6 +3,8 @@ const { authenticate, requirePlan } = require('../middleware/auth');
 const { query, transaction } = require('../database');
 const AIService = require('../services/aiService');
 const PublishingService = require('../services/publishingService');
+const CampaignAutomation = require('../services/campaignAutomation');
+const PlatformAdapterService = require('../services/platformAdapterService');
 const logger = require('../utils/logger');
 
 const router = express.Router();
@@ -198,6 +200,145 @@ router.post('/:id/resume', authenticate, async (req, res) => {
     res.json({ campaign: rows[0] });
   } catch (err) {
     res.status(500).json({ error: 'Failed to resume campaign' });
+  }
+});
+
+// ═══════════════════════════════════════════════════════════════
+// NEW: AI AUTOPILOT ROUTES
+// ═══════════════════════════════════════════════════════════════
+
+// ─── POST /api/campaigns/:id/autopilot/start ──────────────────
+router.post('/:id/autopilot/start', authenticate, async (req, res) => {
+  try {
+    const { rows } = await query(
+      'SELECT * FROM campaigns WHERE id = $1 AND user_id = $2',
+      [req.params.id, req.user.id]
+    );
+    if (!rows[0]) return res.status(404).json({ error: 'Campaign not found' });
+
+    logger.info(`Starting autopilot for campaign ${req.params.id}`);
+
+    const result = await CampaignAutomation.startAutopilot(req.params.id);
+
+    res.json({
+      message: 'AI Autopilot started successfully',
+      strategy: result.strategy,
+      calendar: result.calendar,
+      content_pieces_planned: result.strategy.content_pieces
+    });
+  } catch (err) {
+    logger.error('Start autopilot error:', err);
+    res.status(500).json({ error: 'Failed to start autopilot: ' + err.message });
+  }
+});
+
+// ─── POST /api/campaigns/:id/autopilot/pause ──────────────────
+router.post('/:id/autopilot/pause', authenticate, async (req, res) => {
+  try {
+    const { rows } = await query(
+      'SELECT * FROM campaigns WHERE id = $1 AND user_id = $2',
+      [req.params.id, req.user.id]
+    );
+    if (!rows[0]) return res.status(404).json({ error: 'Campaign not found' });
+
+    await CampaignAutomation.pauseAutopilot(req.params.id);
+
+    res.json({ message: 'Autopilot paused successfully' });
+  } catch (err) {
+    res.status(500).json({ error: 'Failed to pause autopilot' });
+  }
+});
+
+// ─── POST /api/campaigns/:id/autopilot/resume ─────────────────
+router.post('/:id/autopilot/resume', authenticate, async (req, res) => {
+  try {
+    const { rows } = await query(
+      'SELECT * FROM campaigns WHERE id = $1 AND user_id = $2',
+      [req.params.id, req.user.id]
+    );
+    if (!rows[0]) return res.status(404).json({ error: 'Campaign not found' });
+
+    await CampaignAutomation.resumeAutopilot(req.params.id);
+
+    res.json({ message: 'Autopilot resumed successfully' });
+  } catch (err) {
+    res.status(500).json({ error: 'Failed to resume autopilot' });
+  }
+});
+
+// ─── GET /api/campaigns/:id/strategy ──────────────────────────
+router.get('/:id/strategy', authenticate, async (req, res) => {
+  try {
+    const { rows } = await query(
+      'SELECT autopilot_strategy FROM campaigns WHERE id = $1 AND user_id = $2',
+      [req.params.id, req.user.id]
+    );
+    if (!rows[0]) return res.status(404).json({ error: 'Campaign not found' });
+
+    res.json({ strategy: rows[0].autopilot_strategy || {} });
+  } catch (err) {
+    res.status(500).json({ error: 'Failed to fetch strategy' });
+  }
+});
+
+// ─── POST /api/campaigns/:id/optimize ─────────────────────────
+router.post('/:id/optimize', authenticate, async (req, res) => {
+  try {
+    const { rows } = await query(
+      'SELECT * FROM campaigns WHERE id = $1 AND user_id = $2',
+      [req.params.id, req.user.id]
+    );
+    if (!rows[0]) return res.status(404).json({ error: 'Campaign not found' });
+
+    const recommendations = await CampaignAutomation.optimizeCampaign(req.params.id);
+
+    res.json({
+      message: 'Campaign optimization complete',
+      recommendations,
+      count: recommendations.length
+    });
+  } catch (err) {
+    logger.error('Campaign optimization error:', err);
+    res.status(500).json({ error: 'Failed to optimize campaign' });
+  }
+});
+
+// ─── GET /api/campaigns/:id/insights ──────────────────────────
+router.get('/:id/insights', authenticate, async (req, res) => {
+  try {
+    const { rows } = await query(
+      `SELECT * FROM campaign_insights
+       WHERE campaign_id = $1
+       ORDER BY created_at DESC
+       LIMIT 10`,
+      [req.params.id]
+    );
+
+    res.json({ insights: rows });
+  } catch (err) {
+    res.status(500).json({ error: 'Failed to fetch insights' });
+  }
+});
+
+// ─── POST /api/campaigns/:id/adapt-content ────────────────────
+// Adapt existing content for multiple platforms
+router.post('/:id/adapt-content', authenticate, async (req, res) => {
+  try {
+    const { content, target_platforms } = req.body;
+
+    if (!content || !target_platforms?.length) {
+      return res.status(400).json({ error: 'content and target_platforms required' });
+    }
+
+    const adaptations = await PlatformAdapterService.adaptForAllPlatforms(
+      content,
+      target_platforms
+    );
+
+    res.json({ adaptations });
+  } catch (err) {
+    logger.error('Content adaptation error:', err);
+    res.status(500).json({ error: 'Failed to adapt content' });
   }
 });
 

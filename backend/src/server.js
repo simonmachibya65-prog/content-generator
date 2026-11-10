@@ -38,7 +38,11 @@ app.use(helmet());
 app.use(compression());
 
 app.use(cors({
-  origin: process.env.APP_URL || 'http://localhost:3000',
+  origin: [
+    process.env.APP_URL || 'http://localhost:3000',
+    /\.vercel\.app$/,  // Allow all Vercel preview/production domains
+    'https://publift-frontend.vercel.app'
+  ].filter(Boolean),
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization']
@@ -97,6 +101,16 @@ app.get('/health', (req, res) => {
   });
 });
 
+// Also serve health under /api for Vercel serverless deployment
+app.get('/api/health', (req, res) => {
+  res.json({
+    status: 'ok',
+    service: 'Publift API',
+    version: '1.0.0',
+    timestamp: new Date().toISOString()
+  });
+});
+
 // ─── 404 Handler ─────────────────────────────────────────────────────────────
 app.use('*', (req, res) => {
   res.status(404).json({ error: 'Route not found' });
@@ -113,24 +127,35 @@ app.use((err, req, res, next) => {
 });
 
 // ─── Start Server ─────────────────────────────────────────────────────────────
-async function start() {
-  try {
-    await connectDatabase();
-    logger.info('Database connected');
+// Only start the server when NOT running on Vercel (serverless)
+// Vercel's @vercel/node uses the exported app directly
+if (!process.env.VERCEL) {
+  async function start() {
+    try {
+      await connectDatabase();
+      logger.info('Database connected');
 
-    scheduler.init();
-    logger.info('Scheduler initialized');
+      scheduler.init();
+      logger.info('Scheduler initialized');
 
-    app.listen(PORT, () => {
-      logger.info(`Publift API running on port ${PORT}`);
-      logger.info(`Environment: ${process.env.NODE_ENV}`);
-    });
-  } catch (err) {
-    logger.error('Failed to start server:', err);
-    process.exit(1);
+      app.listen(PORT, () => {
+        logger.info(`Publift API running on port ${PORT}`);
+        logger.info(`Environment: ${process.env.NODE_ENV}`);
+      });
+    } catch (err) {
+      logger.error('Failed to start server:', err);
+      process.exit(1);
+    }
   }
-}
 
-start();
+  start();
+} else {
+  // On Vercel: connect database on cold start (no scheduler in serverless)
+  connectDatabase().then(() => {
+    logger.info('Database connected (Vercel serverless)');
+  }).catch(err => {
+    logger.error('Database connection failed:', err);
+  });
+}
 
 module.exports = app;

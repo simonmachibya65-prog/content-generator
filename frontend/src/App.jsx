@@ -14,14 +14,14 @@ import ContentPlanner  from './pages/ContentPlanner';
 import CreateContent   from './pages/CreateContent';
 import AIIntelligence  from './pages/AIIntelligence';
 import CreativeStudio  from './pages/CreativeStudio';
-import Automation      from './pages/Automation';       // replaces Autopilot + Workflows
+import Automation      from './pages/Automation';
 import Analytics       from './pages/Analytics';
 import Audience        from './pages/Audience';
 import Advertising     from './pages/Advertising';
 import CreateCampaign  from './pages/CreateCampaign';
 import CampaignDetail  from './pages/CampaignDetail';
 import AdBudget        from './pages/AdBudget';
-import Social          from './pages/Social';           // replaces SocialAccounts (now at /social)
+import Social          from './pages/Social';
 import MediaLibrary    from './pages/MediaLibrary';
 import Team            from './pages/Team';
 import Approvals       from './pages/Approvals';
@@ -48,24 +48,33 @@ import AdminSystem        from './pages/admin/AdminSystem';
 import MainLayout   from './components/Layout/MainLayout';
 import PublicLayout from './components/Layout/PublicLayout';
 
+// ── Landing Page ──────────────────────────────────────────────
+import Landing from './pages/Landing';
+
+/**
+ * ProtectedRoute — redirects guests to the landing page instead of /login
+ * so visitors see the marketing site first.
+ */
 function ProtectedRoute({ children }) {
   const { isAuthenticated } = useAuthStore();
-  return isAuthenticated ? children : <Navigate to="/login" />;
+  return isAuthenticated ? children : <Navigate to="/home" />;
 }
 
 export default function App() {
   return (
     <Routes>
-      {/* ── Public (with header navbar, no sidebar) ────────── */}
+
+      {/* ── Public pages (header navbar, no sidebar) ────────── */}
       <Route element={<PublicLayout />}>
+        <Route path="/home"     element={<Landing />} />
         <Route path="/login"    element={<Login />} />
         <Route path="/register" element={<Register />} />
       </Route>
 
-      {/* ── Google OAuth callback (no layout needed) ────────── */}
+      {/* ── Google OAuth callback (no layout) ───────────────── */}
       <Route path="/auth/google/success" element={<GoogleAuthSuccess />} />
 
-      {/* ── Onboarding (no sidebar) ─────────────────────────── */}
+      {/* ── Onboarding (no sidebar) ──────────────────────────── */}
       <Route path="/quick-start" element={
         <ProtectedRoute><QuickStart /></ProtectedRoute>
       } />
@@ -73,7 +82,8 @@ export default function App() {
         <ProtectedRoute><BusinessSetup /></ProtectedRoute>
       } />
 
-      {/* ── Main dashboard (with sidebar) ───────────────────── */}
+      {/* ── Main dashboard (with sidebar) ────────────────────── */}
+      {/* Guests hitting "/" get redirected to "/home" (landing page) */}
       <Route path="/" element={
         <ProtectedRoute><MainLayout /></ProtectedRoute>
       }>
@@ -126,7 +136,7 @@ export default function App() {
         <Route path="campaigns"  element={<Navigate to="/advertising" replace />} />
       </Route>
 
-      {/* ── Admin (separate layout) ─────────────────────────── */}
+      {/* ── Admin (separate layout) ──────────────────────────── */}
       <Route path="/admin" element={
         <ProtectedRoute><AdminDashboard /></ProtectedRoute>
       }>
@@ -137,6 +147,9 @@ export default function App() {
         <Route path="moderation"    element={<AdminModeration />} />
         <Route path="system"        element={<AdminSystem />} />
       </Route>
+
+      {/* ── Catch-all → redirect to home ──────────────────────── */}
+      <Route path="*" element={<Navigate to="/home" replace />} />
     </Routes>
   );
 }

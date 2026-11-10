@@ -824,3 +824,98 @@ CREATE TABLE IF NOT EXISTS content_approvals (
 CREATE INDEX IF NOT EXISTS idx_content_approvals_post ON content_approvals(post_id);
 CREATE INDEX IF NOT EXISTS idx_content_approvals_status ON content_approvals(status);
 CREATE INDEX IF NOT EXISTS idx_content_approvals_approver ON content_approvals(approver_id);
+
+
+-- ═══════════════════════════════════════════════════════════════
+-- NEW TABLES FOR AUTONOMOUS MARKETING SYSTEM
+-- ═══════════════════════════════════════════════════════════════
+
+-- ─── BUSINESS PROFILES ────────────────────────────────────────
+-- Stores comprehensive business information for AI strategy
+CREATE TABLE IF NOT EXISTS business_profiles (
+  id                  UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+  user_id             UUID NOT NULL REFERENCES users(id) ON DELETE CASCADE UNIQUE,
+  business_name       VARCHAR(255),
+  industry            VARCHAR(100),
+  product_service     TEXT,
+  description         TEXT,
+  target_audience     TEXT,
+  marketing_objective TEXT,
+  brand_voice         VARCHAR(100),
+  brand_colors        TEXT[],
+  languages           TEXT[],
+  website             TEXT,
+  logo_url            TEXT,
+  brand_guidelines    JSONB DEFAULT '{}',
+  competitive_info    JSONB DEFAULT '{}',
+  created_at          TIMESTAMP DEFAULT NOW(),
+  updated_at          TIMESTAMP DEFAULT NOW()
+);
+
+-- ─── PUBLISHING MODES ─────────────────────────────────────────
+-- Controls how content is published per account (manual/approval/automatic)
+CREATE TABLE IF NOT EXISTS publishing_modes (
+  id                UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+  user_id           UUID NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+  social_account_id UUID NOT NULL REFERENCES social_accounts(id) ON DELETE CASCADE,
+  mode              VARCHAR(20) DEFAULT 'approval', -- manual, approval, automatic
+  auto_rules        JSONB DEFAULT '{}',            -- Rules for automatic publishing
+  created_at        TIMESTAMP DEFAULT NOW(),
+  updated_at        TIMESTAMP DEFAULT NOW(),
+  UNIQUE(user_id, social_account_id)
+);
+
+-- ─── CAMPAIGN INSIGHTS ────────────────────────────────────────
+-- AI-generated insights and recommendations
+CREATE TABLE IF NOT EXISTS campaign_insights (
+  id             UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+  campaign_id    UUID NOT NULL REFERENCES campaigns(id) ON DELETE CASCADE,
+  insights       JSONB NOT NULL,
+  recommendations JSONB NOT NULL,
+  metrics        JSONB,
+  applied        BOOLEAN DEFAULT FALSE,
+  created_at     TIMESTAMP DEFAULT NOW()
+);
+
+-- ─── UPDATE CAMPAIGNS TABLE ───────────────────────────────────
+-- Add autopilot columns to existing campaigns table
+ALTER TABLE IF EXISTS campaigns ADD COLUMN IF NOT EXISTS autopilot_enabled BOOLEAN DEFAULT FALSE;
+ALTER TABLE IF EXISTS campaigns ADD COLUMN IF NOT EXISTS autopilot_strategy JSONB;
+ALTER TABLE IF EXISTS campaigns ADD COLUMN IF NOT EXISTS autopilot_start_date TIMESTAMP;
+ALTER TABLE IF EXISTS campaigns ADD COLUMN IF NOT EXISTS industry VARCHAR(100);
+ALTER TABLE IF EXISTS campaigns ADD COLUMN IF NOT EXISTS product_service TEXT;
+ALTER TABLE IF EXISTS campaigns ADD COLUMN IF NOT EXISTS marketing_objective TEXT;
+ALTER TABLE IF EXISTS campaigns ADD COLUMN IF NOT EXISTS brand_voice VARCHAR(100);
+ALTER TABLE IF EXISTS campaigns ADD COLUMN IF NOT EXISTS brand_colors TEXT[];
+
+-- ─── UPDATE PUBLISHING_JOBS TABLE ─────────────────────────────
+-- Add quality control columns
+ALTER TABLE IF EXISTS publishing_jobs ADD COLUMN IF NOT EXISTS quality_score INTEGER;
+ALTER TABLE IF EXISTS publishing_jobs ADD COLUMN IF NOT EXISTS quality_report JSONB;
+ALTER TABLE IF EXISTS publishing_jobs ADD COLUMN IF NOT EXISTS publishing_mode VARCHAR(20) DEFAULT 'approval';
+ALTER TABLE IF EXISTS publishing_jobs ADD COLUMN IF NOT EXISTS approved_at TIMESTAMP;
+ALTER TABLE IF EXISTS publishing_jobs ADD COLUMN IF NOT EXISTS approved_by UUID REFERENCES users(id);
+
+-- ─── CREATE INDEXES FOR PERFORMANCE ───────────────────────────
+CREATE INDEX IF NOT EXISTS idx_business_profiles_user_id ON business_profiles(user_id);
+CREATE INDEX IF NOT EXISTS idx_publishing_modes_user_id ON publishing_modes(user_id);
+CREATE INDEX IF NOT EXISTS idx_publishing_modes_account_id ON publishing_modes(social_account_id);
+CREATE INDEX IF NOT EXISTS idx_campaign_insights_campaign_id ON campaign_insights(campaign_id);
+CREATE INDEX IF NOT EXISTS idx_campaigns_autopilot ON campaigns(autopilot_enabled, status) WHERE autopilot_enabled = TRUE;
+CREATE INDEX IF NOT EXISTS idx_publishing_jobs_quality ON publishing_jobs(quality_score) WHERE quality_score IS NOT NULL;
+CREATE INDEX IF NOT EXISTS idx_publishing_jobs_mode ON publishing_jobs(publishing_mode, status);
+
+-- ═══════════════════════════════════════════════════════════════
+-- SEED DATA FOR TESTING
+-- ═══════════════════════════════════════════════════════════════
+
+-- Insert publishing modes for testing (will need actual user/account IDs)
+-- INSERT INTO publishing_modes (user_id, social_account_id, mode) VALUES (...);
+
+COMMENT ON TABLE business_profiles IS 'Comprehensive business information for AI-driven marketing strategy';
+COMMENT ON TABLE publishing_modes IS 'Controls automation level per social account: manual, approval, or automatic';
+COMMENT ON TABLE campaign_insights IS 'AI-generated performance insights and optimization recommendations';
+COMMENT ON COLUMN campaigns.autopilot_enabled IS 'Whether AI Autopilot is active for this campaign';
+COMMENT ON COLUMN campaigns.autopilot_strategy IS 'AI-generated 30-day marketing strategy JSON';
+COMMENT ON COLUMN publishing_jobs.quality_score IS 'AI quality score 0-100 from pre-publish validation';
+COMMENT ON COLUMN publishing_jobs.publishing_mode IS 'Mode used when job was created: manual, approval, or automatic';

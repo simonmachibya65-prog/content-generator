@@ -45,3 +45,10 @@ temp/
 # Database
 *.sqlite
 *.db
+
+# Vercel deployment secrets
+.vercel-token
+.vercel/
+.vercel-projects.json
+.vercel
+.env*

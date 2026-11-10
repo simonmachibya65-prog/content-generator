@@ -8,15 +8,28 @@
 [![Node.js](https://img.shields.io/badge/Node.js-18+-green.svg)](https://nodejs.org)
 [![React](https://img.shields.io/badge/React-18-blue.svg)](https://reactjs.org)
 [![PostgreSQL](https://img.shields.io/badge/PostgreSQL-14+-blue.svg)](https://postgresql.org)
+[![Vercel](https://img.shields.io/badge/Deployed-Vercel-black.svg)](https://vercel.com)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
 
 A complete SaaS platform for managing multiple social media accounts with AI-powered content generation, automated publishing, and intelligent campaign management.
 
-[Features](#-features) • [Tech Stack](#-tech-stack) • [Getting Started](#-getting-started) • [Documentation](#-api-documentation) • [Roadmap](#-roadmap)
+[Features](#-features) • [Tech Stack](#-tech-stack) • [Getting Started](#-getting-started) • [Deployment](#-deployment) • [Documentation](#-api-documentation) • [Roadmap](#-roadmap)
 
 </div>
 
 ---
+
+## 🌐 Live Deployment
+
+**URL:** [https://publift.vercel.app](https://publift.vercel.app)
+
+| Path | Service |
+|------|---------|
+| `https://publift.vercel.app` | React frontend (SPA) |
+| `https://publift.vercel.app/api/*` | Express backend API |
+| `https://publift.vercel.app/api/health` | API health check |
+
+Frontend and backend are deployed as a single Vercel project under one branded URL. The frontend is pre-built and served as static files. The backend runs as a Vercel serverless function at `/api/*`.
 
 ## 🌟 Features
 
@@ -98,6 +111,7 @@ Create and manage social media ads:
 
 ```
 publift/
+├── api/index.js               # Vercel serverless entry point (Express API)
 ├── backend/                    # Node.js + Express REST API
 │   ├── src/
 │   │   ├── adapters/          # Platform-specific OAuth & Publishing
@@ -111,6 +125,9 @@ publift/
 │   │   ├── services/          # Business logic & AI services
 │   │   │   ├── aiService.js   # OpenAI, Gemini integration
 │   │   │   ├── publishingService.js
+│   │   │   ├── campaignAutomation.js  # AI Autopilot
+│   │   │   ├── platformAdapterService.js  # Platform adaptation
+│   │   │   ├── qualityControlService.js   # Content validation
 │   │   │   ├── analyticsService.js
 │   │   │   └── scheduler.js   # Cron jobs
 │   │   ├── middleware/        # Auth, validation, rate limiting
@@ -118,14 +135,18 @@ publift/
 │   │   └── utils/             # Encryption, logging
 │   └── package.json
 │
-└── frontend/                   # React + Vite SPA
-    ├── src/
-    │   ├── pages/             # Dashboard, CreativeStudio, Analytics
-    │   ├── components/        # Reusable UI components
-    │   ├── store/             # Zustand state management
-    │   └── lib/               # API client, utilities
-    ├── tailwind.config.js
-    └── package.json
+├── frontend/                   # React + Vite SPA
+│   ├── src/
+│   │   ├── pages/             # Dashboard, CreativeStudio, Analytics
+│   │   ├── components/        # Reusable UI components
+│   │   ├── store/             # Zustand state management
+│   │   └── lib/               # API client, utilities
+│   ├── tailwind.config.js
+│   └── package.json
+│
+├── vercel.json                 # Vercel deployment config
+├── package.json                # Root package.json (shared deps for serverless)
+└── .vercel-token              # Vercel deployment token (gitignored)
 ```
 
 ---
@@ -247,6 +268,22 @@ Facebook:    facebook.com/pagename
 X (Twitter): x.com/username or twitter.com/username
 LinkedIn:    linkedin.com/in/profile or linkedin.com/company/name
 ```
+
+### OAuth Callback URLs (Production)
+
+When connecting social accounts on the live deployment, set callback URLs to:
+
+```
+https://publift.vercel.app/api/oauth/tiktok/callback
+https://publift.vercel.app/api/oauth/youtube/callback
+https://publift.vercel.app/api/oauth/instagram/callback
+https://publift.vercel.app/api/oauth/facebook/callback
+https://publift.vercel.app/api/oauth/x/callback
+https://publift.vercel.app/api/oauth/linkedin/callback
+https://publift.vercel.app/api/auth/google/callback
+```
+
+Update these in each platform's developer console (TikTok, Google Cloud, Meta, X, LinkedIn).
 
 ---
 
@@ -480,3 +517,4 @@ Built with these amazing technologies:
 [Website](https://publift.io) • [Documentation](https://docs.publift.io) • [Twitter](https://twitter.com/publift) • [LinkedIn](https://linkedin.com/company/publift)
 
 </div>
+
