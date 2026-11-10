@@ -8,23 +8,32 @@ export default {
         sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'sans-serif']
       },
       colors: {
-        // ── Light theme brand palette ──
+        // ── Brand palette (Buffer-inspired) ──
         brand: {
-          blue:   '#2563eb',
-          indigo: '#4f46e5',
-          teal:   '#0891b2',
-          purple: '#7c3aed',
+          green:   '#16A34A',
+          'green-hover': '#15803D',
+          blue:    '#2563eb',
+          indigo:  '#4f46e5',
+          purple:  '#7c3aed',
         },
-        // ── Sidebar & surface ──
+        // ── Warm neutral surfaces ──
+        surface: {
+          primary:  '#FAFAF9',
+          secondary:'#F5F5F4',
+          card:     '#FFFFFF',
+          elevated: '#F5F5F4',
+          muted:    '#FAFAF9',
+        },
+        // ── Sidebar ──
         sidebar: {
-          bg:     '#ffffff',
-          hover:  '#f1f5f9',
-          active: '#eff6ff',
-          border: '#e2e8f0',
-          text:   '#475569',
-          'text-active': '#2563eb',
+          bg:     '#FFFFFF',
+          hover:  '#F5F5F4',
+          active: '#DCFCE7',
+          border: '#E7E5E4',
+          text:   '#57534E',
+          'text-active': '#16A34A',
         },
-        // ── Legacy dark compat ──
+        // ── Dark theme compat (legacy) ──
         dark: {
           base:     '#0f1117',
           surface:  '#1a1f2e',
@@ -35,9 +44,9 @@ export default {
           hover:    '#303648',
         },
         accent: {
-          primary:          '#2563eb',
+          primary:          '#16A34A',
           secondary:        '#4f46e5',
-          'primary-hover':  '#1d4ed8',
+          'primary-hover':  '#15803D',
           'secondary-hover':'#4338ca',
         },
         success: '#16a34a',

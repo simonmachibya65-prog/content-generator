@@ -3,7 +3,7 @@ import {
   LayoutDashboard, Calendar, Sparkles, BarChart3,
   Image, Users, Settings, HelpCircle, Zap, ChevronRight,
   ChevronLeft, Megaphone, Bot, Share2, Workflow,
-  BookUser, Library, CheckSquare
+  BookUser, Library, CheckSquare, Inbox,
 } from 'lucide-react';
 import clsx from 'clsx';
 import { useAuthStore } from '../../store/authStore';
@@ -17,22 +17,17 @@ const NAV_SECTIONS = [
     ]
   },
   {
-    label: 'Creation',
+    label: 'Create',
     items: [
       { icon: Sparkles,  label: 'Creative Studio', path: '/creative-studio' },
       { icon: Megaphone, label: 'Advertising',     path: '/advertising' },
     ]
   },
   {
-    label: 'Intelligence',
+    label: 'Engage',
     items: [
       { icon: Bot, label: 'AI Intelligence', path: '/ai-intelligence' },
-    ]
-  },
-  {
-    label: 'Publishing',
-    items: [
-      { icon: Share2, label: 'Social Accounts', path: '/social' },
+      { icon: Inbox, label: 'Community',      path: '/social' },
     ]
   },
   {
@@ -54,11 +49,11 @@ const NAV_SECTIONS = [
 ];
 
 const PLAN_COLORS = {
-  free:        { bg: 'bg-gray-700',   text: 'text-gray-300' },
-  starter:     { bg: 'bg-blue-600',   text: 'text-blue-100' },
-  creator_pro: { bg: 'bg-indigo-600', text: 'text-indigo-100' },
-  business:    { bg: 'bg-violet-600', text: 'text-violet-100' },
-  agency:      { bg: 'bg-amber-500',  text: 'text-amber-100' }
+  free:        { bg: 'bg-stone-100',   text: 'text-stone-600' },
+  starter:     { bg: 'bg-green-100',   text: 'text-green-700' },
+  creator_pro: { bg: 'bg-indigo-100',  text: 'text-indigo-700' },
+  business:    { bg: 'bg-violet-100',  text: 'text-violet-700' },
+  agency:      { bg: 'bg-amber-100',   text: 'text-amber-700' }
 };
 
 export default function Sidebar({ collapsed, onToggle }) {
@@ -66,8 +61,6 @@ export default function Sidebar({ collapsed, onToggle }) {
   const { user } = useAuthStore();
   const planStyle = PLAN_COLORS[user?.plan] || PLAN_COLORS.free;
 
-  // A path is active if it matches exactly, or if the current path starts with it
-  // (but "/" only matches exactly to avoid matching everything)
   const isActive = (path) => {
     if (path === '/') return location.pathname === '/';
     return location.pathname === path || location.pathname.startsWith(path + '/');
@@ -76,30 +69,30 @@ export default function Sidebar({ collapsed, onToggle }) {
   return (
     <div
       className={clsx(
-        'h-screen sidebar-bg flex flex-col border-r border-dark-border flex-shrink-0 transition-all duration-300 relative',
+        'h-screen bg-white flex flex-col border-r border-stone-200 flex-shrink-0 transition-all duration-300 relative',
         collapsed ? 'w-[72px]' : 'w-[248px]'
       )}
     >
       {/* ── Collapse Toggle ─────────────── */}
       <button
         onClick={onToggle}
-        className="absolute -right-3 top-20 z-50 w-6 h-6 rounded-full bg-dark-elevated border border-dark-border flex items-center justify-center hover:bg-dark-hover transition-colors"
+        className="absolute -right-3 top-20 z-50 w-6 h-6 rounded-full bg-white border border-stone-200 flex items-center justify-center hover:bg-stone-50 transition-colors shadow-sm"
         aria-label={collapsed ? 'Expand sidebar' : 'Collapse sidebar'}
       >
         {collapsed
-          ? <ChevronRight size={14} className="text-gray-400" />
-          : <ChevronLeft  size={14} className="text-gray-400" />}
+          ? <ChevronRight size={14} className="text-stone-400" />
+          : <ChevronLeft  size={14} className="text-stone-400" />}
       </button>
 
       {/* ── Logo ──────────────────────────── */}
-      <div className="px-5 py-5 border-b border-dark-border">
+      <div className="px-5 py-5 border-b border-stone-200">
         <Link to="/" className="flex items-center gap-3 group">
-          <div className="w-9 h-9 bg-gradient-to-br from-accent-primary to-emerald-500 rounded-xl flex items-center justify-center shadow-glow-teal-sm group-hover:scale-105 transition-transform flex-shrink-0">
-            <Zap size={18} className="text-dark-base" />
+          <div className="w-9 h-9 bg-gradient-to-br from-green-500 to-emerald-600 rounded-xl flex items-center justify-center shadow-sm group-hover:scale-105 transition-transform flex-shrink-0">
+            <Zap size={18} className="text-white" />
           </div>
           {!collapsed && (
             <div>
-          <span className="text-lg font-bold text-white tracking-tight">Publift</span>
+              <span className="text-lg font-bold text-stone-900 tracking-tight">Publift</span>
               <div className="flex items-center gap-1.5">
                 <span className={clsx('text-[10px] px-1.5 py-0.5 rounded font-semibold uppercase tracking-wide', planStyle.bg, planStyle.text)}>
                   {user?.plan || 'free'}
@@ -115,7 +108,7 @@ export default function Sidebar({ collapsed, onToggle }) {
         {NAV_SECTIONS.map((section) => (
           <div key={section.label}>
             {!collapsed && (
-              <p className="px-3 mb-2 text-[10px] font-semibold uppercase tracking-widest text-gray-600">
+              <p className="px-3 mb-2 text-[10px] font-semibold uppercase tracking-widest text-stone-400">
                 {section.label}
               </p>
             )}
@@ -136,17 +129,17 @@ export default function Sidebar({ collapsed, onToggle }) {
                       size={18}
                       className={clsx(
                         'flex-shrink-0',
-                        active ? 'text-accent-primary' : 'text-gray-500 group-hover:text-white'
+                        active ? 'text-green-600' : 'text-stone-400 group-hover:text-stone-700'
                       )}
                     />
                     {!collapsed && <span className="flex-1 text-sm">{label}</span>}
                     {!collapsed && badge && !active && (
-                      <span className="text-[10px] px-1.5 py-0.5 rounded bg-accent-primary/20 text-accent-primary font-semibold">
+                      <span className="text-[10px] px-1.5 py-0.5 rounded bg-green-100 text-green-700 font-semibold">
                         {badge}
                       </span>
                     )}
                     {!collapsed && active && (
-                      <ChevronRight size={14} className="text-accent-primary/50" />
+                      <ChevronRight size={14} className="text-green-600/50" />
                     )}
                   </Link>
                 );
@@ -158,17 +151,17 @@ export default function Sidebar({ collapsed, onToggle }) {
 
       {/* ── AI Credits Progress ────────────── */}
       {user && !collapsed && (
-        <div className="mx-3 mb-3 p-3 rounded-xl bg-dark-surface border border-dark-border">
+        <div className="mx-3 mb-3 p-3 rounded-xl bg-stone-50 border border-stone-200">
           <div className="flex justify-between items-center mb-2">
-            <span className="text-xs font-semibold text-gray-400">AI Credits</span>
-            <span className="text-xs font-bold text-white">
+            <span className="text-xs font-semibold text-stone-500">AI Credits</span>
+            <span className="text-xs font-bold text-stone-900">
               {Math.max(0, (user.ai_credits || 0) - (user.ai_credits_used || 0))}
-              <span className="text-gray-600">/{user.ai_credits || 0}</span>
+              <span className="text-stone-400">/{user.ai_credits || 0}</span>
             </span>
           </div>
-          <div className="h-1.5 bg-dark-base rounded-full overflow-hidden">
+          <div className="h-1.5 bg-stone-200 rounded-full overflow-hidden">
             <div
-              className="h-full bg-gradient-to-r from-accent-primary to-emerald-500 rounded-full transition-all"
+              className="h-full bg-gradient-to-r from-green-500 to-emerald-500 rounded-full transition-all"
               style={{
                 width: `${user.ai_credits
                   ? Math.min(100, ((user.ai_credits - user.ai_credits_used) / user.ai_credits) * 100)
@@ -179,7 +172,7 @@ export default function Sidebar({ collapsed, onToggle }) {
           {user.plan === 'free' && (
             <Link
               to="/settings/billing"
-              className="mt-2 text-[11px] text-accent-primary hover:text-accent-primary-hover font-medium flex items-center gap-1"
+              className="mt-2 text-[11px] text-green-600 hover:text-green-700 font-medium flex items-center gap-1"
             >
               <Zap size={10} /> Upgrade for more
             </Link>
@@ -188,7 +181,7 @@ export default function Sidebar({ collapsed, onToggle }) {
       )}
 
       {/* ── Bottom Links ──────────────────── */}
-      <div className="px-3 pb-4 border-t border-dark-border pt-3 space-y-0.5">
+      <div className="px-3 pb-4 border-t border-stone-200 pt-3 space-y-0.5">
         {[
           { icon: Settings,   label: 'Settings',     path: '/settings' },
           { icon: HelpCircle, label: 'Help & Support', path: '/help' },

@@ -18,9 +18,9 @@ export default function Landing() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-stone-50">
       {/* Hero Section - Buffer Style */}
-      <section className="relative overflow-hidden bg-gradient-to-b from-blue-50 via-white to-white">
+      <section className="relative overflow-hidden bg-gradient-to-b from-green-50 via-stone-50 to-stone-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-24 lg:pt-32 lg:pb-32">
           <div className="text-center max-w-4xl mx-auto">
             <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold text-gray-900 mb-6 leading-tight">
@@ -32,14 +32,14 @@ export default function Landing() {
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
               <Link
                 to="/register"
-                className="w-full sm:w-auto px-8 py-4 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition-all flex items-center justify-center gap-2 text-lg shadow-lg shadow-blue-200"
+                className="w-full sm:w-auto px-8 py-4 bg-green-600 text-white rounded-lg font-semibold hover:bg-green-700 transition-all flex items-center justify-center gap-2 text-lg shadow-lg shadow-green-200"
               >
                 Get started free
                 <ArrowRight className="w-5 h-5" />
               </Link>
               <Link
                 to="/login"
-                className="w-full sm:w-auto px-8 py-4 bg-white text-gray-700 rounded-lg font-semibold hover:bg-gray-50 transition-all border-2 border-gray-200 text-lg"
+                className="w-full sm:w-auto px-8 py-4 bg-white text-stone-700 rounded-lg font-semibold hover:bg-stone-50 transition-all border-2 border-stone-200 text-lg"
               >
                 Sign in
               </Link>
@@ -65,7 +65,7 @@ export default function Landing() {
               ))}
             </div>
 
-            <p className="text-sm text-gray-500">
+            <p className="text-sm text-stone-400">
               No credit card required • Free plan forever • Cancel anytime
             </p>
           </div>
@@ -73,7 +73,7 @@ export default function Landing() {
       </section>
 
       {/* Main Features - Card Layout */}
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-stone-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {/* Publish */}
@@ -140,7 +140,7 @@ export default function Landing() {
       </section>
 
       {/* AI Autopilot Showcase */}
-      <section className="py-20 bg-gradient-to-b from-white to-blue-50">
+      <section className="py-20 bg-gradient-to-b from-stone-50 to-green-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <div className="inline-flex items-center gap-2 px-4 py-2 bg-emerald-50 text-emerald-700 rounded-full text-sm font-semibold mb-4">
@@ -228,7 +228,7 @@ export default function Landing() {
       </section>
 
       {/* Social Proof */}
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-stone-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-4 gap-8 text-center">
             {[
@@ -247,7 +247,7 @@ export default function Landing() {
       </section>
 
       {/* Pricing */}
-      <section className="py-20 bg-gradient-to-b from-white to-gray-50" id="pricing">
+      <section className="py-20 bg-gradient-to-b from-stone-50 to-stone-100" id="pricing">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-4">
@@ -324,7 +324,7 @@ export default function Landing() {
       </section>
 
       {/* Final CTA */}
-      <section className="py-20 bg-gradient-to-br from-blue-600 to-indigo-700">
+      <section className="py-20 bg-gradient-to-br from-green-600 to-emerald-700">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-4xl sm:text-5xl font-bold text-white mb-6">
             Ready to automate your marketing?
@@ -351,7 +351,7 @@ export default function Landing() {
           <div className="grid md:grid-cols-4 gap-8 mb-8">
             <div>
               <div className="flex items-center gap-2 mb-4">
-                <Zap className="w-6 h-6 text-blue-500" />
+                <Zap className="w-6 h-6 text-green-500" />
                 <span className="text-xl font-bold text-white">Publift</span>
               </div>
               <p className="text-sm">
@@ -412,7 +412,7 @@ function FeatureCard({ icon, title, subtitle, description, iconColor, iconBg }) 
 
 function PricingCard({ name, price, period, description, features, cta, ctaLink, popular }) {
   return (
-    <div className={`relative rounded-2xl p-8 ${popular ? 'bg-blue-600 text-white border-4 border-blue-700 shadow-2xl scale-105' : 'bg-white border border-gray-200'}`}>
+    <div className={`relative rounded-2xl p-8 ${popular ? 'bg-green-600 text-white border-4 border-green-700 shadow-2xl scale-105' : 'bg-white border border-stone-200'}`}>
       {popular && (
         <div className="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1 bg-amber-400 text-gray-900 rounded-full text-sm font-bold">
           Most Popular
@@ -438,8 +438,8 @@ function PricingCard({ name, price, period, description, features, cta, ctaLink,
         to={ctaLink}
         className={`block w-full py-3 px-4 rounded-lg font-semibold text-center transition-all ${
           popular
-            ? 'bg-white text-blue-600 hover:bg-blue-50'
-            : 'bg-blue-600 text-white hover:bg-blue-700'
+            ? 'bg-white text-green-600 hover:bg-green-50'
+            : 'bg-green-600 text-white hover:bg-green-700'
         }`}
       >
         {cta}
