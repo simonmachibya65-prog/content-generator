@@ -5,7 +5,7 @@ const { query } = require('../database');
 const logger = require('../utils/logger');
 
 const router = express.Router();
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
+const getStripe = () => new Stripe(process.env.STRIPE_SECRET_KEY || 'sk_test_placeholder');
 
 const PLANS = {
   free:        { price: 0,     credits: 10 },
@@ -23,7 +23,7 @@ router.post('/create-checkout', authenticate, async (req, res) => {
       return res.status(400).json({ error: 'Invalid plan' });
     }
 
-    const session = await stripe.checkout.sessions.create({
+    const session = await getStripe().checkout.sessions.create({
       customer_email: req.user.email,
       payment_method_types: ['card'],
       line_items: [{
@@ -49,7 +49,7 @@ router.post('/webhook', express.raw({ type: 'application/json' }), async (req, r
   let event;
 
   try {
-    event = stripe.webhooks.constructEvent(req.body, sig, process.env.STRIPE_WEBHOOK_SECRET);
+    event = getStripe().webhooks.constructEvent(req.body, sig, process.env.STRIPE_WEBHOOK_SECRET);
   } catch (err) {
     return res.status(400).send(`Webhook Error: ${err.message}`);
   }
