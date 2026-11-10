@@ -1,17 +1,11 @@
-// Debug: catch and return any startup error
-let app;
-let startupError;
-
-try {
-  app = require('./server.js');
-} catch (e) {
-  startupError = e.message + '\n' + e.stack;
-}
-
+// Absolute minimal — no dependencies at all
 module.exports = (req, res) => {
-  if (startupError) {
-    res.status(200).json({ startup_error: startupError });
-    return;
-  }
-  app(req, res);
+  res.setHeader('Content-Type', 'application/json');
+  res.end(JSON.stringify({ 
+    ok: true, 
+    url: req.url,
+    node: process.version,
+    cwd: process.cwd(),
+    env: process.env.NODE_ENV
+  }));
 };
