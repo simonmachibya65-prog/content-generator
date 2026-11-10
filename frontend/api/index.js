@@ -1,4 +1,17 @@
-// Minimal test first — confirm Vercel function works at all
+// Debug: catch and return any startup error
+let app;
+let startupError;
+
+try {
+  app = require('./server.js');
+} catch (e) {
+  startupError = e.message + '\n' + e.stack;
+}
+
 module.exports = (req, res) => {
-  res.json({ status: 'ok', message: 'Vercel function working', path: req.url });
+  if (startupError) {
+    res.status(200).json({ startup_error: startupError });
+    return;
+  }
+  app(req, res);
 };
