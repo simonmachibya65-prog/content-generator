@@ -29,7 +29,7 @@ api.interceptors.response.use(
       const { isAuthenticated } = useAuthStore.getState();
       if (isAuthenticated) {
         useAuthStore.getState().logout();
-        window.location.href = '/home';
+        window.location.href = '/';
       }
     }
     return Promise.reject(error);
