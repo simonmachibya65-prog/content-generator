@@ -29,8 +29,15 @@ export const useAuthStore = create(
         return data;
       },
 
-      logout: () => {
+      logout: async () => {
+        try {
+          await api.post('/auth/logout', {});
+        } catch {
+          // Backend may be unreachable; still clear local state
+        }
         set({ user: null, accessToken: null, isAuthenticated: false });
+        // Force-clear persisted storage so a hard reload stays logged out
+        localStorage.removeItem('auth-storage');
       },
 
       updateUser: (userData) => {

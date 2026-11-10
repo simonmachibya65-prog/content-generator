@@ -1,5 +1,5 @@
 import { useState, useRef } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useAuthStore } from '../store/authStore';
 import { useMutation, useQueryClient } from 'react-query';
 import api from '../lib/api';
@@ -11,6 +11,7 @@ import {
 
 export default function Settings() {
   const { user, logout, updateUser } = useAuthStore();
+  const navigate = useNavigate();
   const fileInputRef = useRef(null);
   const [form, setForm] = useState({
     full_name: user?.full_name || '',
@@ -232,7 +233,7 @@ export default function Settings() {
               <p className="font-semibold text-sm text-white">Sign Out</p>
               <p className="text-xs text-gray-500">Sign out of your account</p>
             </div>
-            <button onClick={logout} className="btn btn-secondary btn-sm">
+            <button onClick={async () => { await logout(); navigate('/home'); }} className="btn btn-secondary btn-sm">
               <LogOut size={14} /> Sign Out
             </button>
           </div>
