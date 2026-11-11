@@ -41,6 +41,7 @@ app.use(cors({
   origin: [
     process.env.APP_URL || 'http://localhost:3000',
     /\.vercel\.app$/,  // Allow all Vercel preview/production domains
+    'https://publift.vercel.app',
     'https://publift-frontend.vercel.app'
   ].filter(Boolean),
   credentials: true,
