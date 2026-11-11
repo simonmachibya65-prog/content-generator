@@ -1,7 +1,7 @@
 {
   "version": 2,
   "framework": null,
-  "buildCommand": "cd frontend && npm install --include=dev && npm run build",
+  "buildCommand": "cd frontend && npm install --include=dev && VITE_API_URL=/api npm run build",
   "outputDirectory": "frontend/dist",
   "installCommand": "npm install && cd frontend && npm install --include=dev",
   "functions": {
