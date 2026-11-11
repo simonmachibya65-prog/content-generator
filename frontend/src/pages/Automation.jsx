@@ -11,6 +11,7 @@ import { useQuery, useMutation, useQueryClient } from 'react-query';
 import api from '../lib/api';
 import toast from 'react-hot-toast';
 import { FaTiktok, FaYoutube, FaXTwitter, FaInstagram, FaFacebookF, FaLinkedinIn } from 'react-icons/fa6';
+import { Clock, TrendingUp, Rss, Webhook } from 'lucide-react';
 
 const PLATFORM_ICONS = {
   tiktok:    { Icon: FaTiktok,     color: '#000000' },
