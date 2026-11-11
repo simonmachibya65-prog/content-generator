@@ -1,18 +1,18 @@
 #!/bin/bash
-# ─── Publift Database Setup ───────────────────────────────────
+# ─── SpyRex Database Setup ───────────────────────────────────
 # Run this ONCE to create the PostgreSQL user and database.
 # Usage: bash setup-db.sh
 # ─────────────────────────────────────────────────────────────
 
 set -e
 
-DB_USER="publift"
-DB_PASS="publift_secure_2024"
-DB_NAME="publift_db"
+DB_USER="spyrex"
+DB_PASS="spyrex_secure_2024"
+DB_NAME="spyrex_db"
 
 echo ""
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-echo "  Publift – PostgreSQL Setup"
+echo "  SpyRex – PostgreSQL Setup"
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 echo ""
 echo "This script needs to run as the 'postgres' OS user."

@@ -50,7 +50,7 @@ export default function PublicHeader() {
               </div>
               <div className="flex flex-col">
                 <span className="text-[18px] font-bold text-stone-900 tracking-tight leading-none">
-                  Publift
+                  SpyRex
                 </span>
                 <span className="text-[9px] font-semibold text-green-600/70 tracking-[0.15em] uppercase leading-none mt-0.5">
                   AI Platform

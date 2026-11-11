@@ -21,7 +21,7 @@ async function initMockDb() {
   storage.users = [
     {
       id: '1',
-      email: 'demo@publift.io',
+      email: 'demo@spyrex.io',
       password: hashedPassword,
       full_name: 'Demo User',
       plan: 'free',
@@ -33,7 +33,7 @@ async function initMockDb() {
   ];
   
   logger.info('Mock database initialized with demo user');
-  logger.info('Login with: demo@publift.io / password123');
+  logger.info('Login with: demo@spyrex.io / password123');
 }
 
 // Mock query function

@@ -185,12 +185,12 @@ export default function Security() {
         </div>
 
         <p className="text-sm text-gray-400 mb-4">
-          Use API keys to integrate Publift with your applications and scripts.
+          Use API keys to integrate SpyRex with your applications and scripts.
         </p>
 
         <div className="flex items-center gap-3 p-4 rounded-xl bg-dark-surface border border-dark-border">
           <div className="flex-1 font-mono text-sm text-white">
-            {showApiKey ? 'publift_sk_1234567890abcdef' : '••••••••••••••••••••••••'}
+            {showApiKey ? 'spyrex_sk_1234567890abcdef' : '••••••••••••••••••••••••'}
           </div>
           <button
             onClick={() => setShowApiKey(!showApiKey)}

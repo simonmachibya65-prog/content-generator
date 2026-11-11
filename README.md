@@ -1,6 +1,6 @@
 <div align="center">
 
-# 🚀 Publift - AI Social Media Management Platform
+# 🚀 SpyRex - AI Social Media Management Platform
 
 **Lift your publishing game. Create once. Publish everywhere. Grow intelligently.**
 
@@ -21,13 +21,13 @@ A complete SaaS platform for managing multiple social media accounts with AI-pow
 
 ## 🌐 Live Deployment
 
-**URL:** [https://publift.vercel.app](https://publift.vercel.app)
+**URL:** [https://spyrex.vercel.app](https://spyrex.vercel.app)
 
 | Path | Service |
 |------|---------|
-| `https://publift.vercel.app` | React frontend (SPA) |
-| `https://publift.vercel.app/api/*` | Express backend API |
-| `https://publift.vercel.app/api/health` | API health check |
+| `https://spyrex.vercel.app` | React frontend (SPA) |
+| `https://spyrex.vercel.app/api/*` | Express backend API |
+| `https://spyrex.vercel.app/api/health` | API health check |
 
 Frontend and backend are deployed as a single Vercel project under one branded URL. The frontend is pre-built and served as static files. The backend runs as a Vercel serverless function at `/api/*`.
 
@@ -110,7 +110,7 @@ Create and manage social media ads:
 ## 🏗️ Architecture
 
 ```
-publift/
+spyrex/
 ├── api/index.js               # Vercel serverless entry point (Express API)
 ├── backend/                    # Node.js + Express REST API
 │   ├── src/
@@ -225,10 +225,10 @@ sudo apt install postgresql  # Linux
 brew install postgresql       # macOS
 
 # Create database
-createdb publift_db
+createdb spyrex_db
 
 # Update .env
-DATABASE_URL=postgresql://user:password@localhost:5432/publift_db
+DATABASE_URL=postgresql://user:password@localhost:5432/spyrex_db
 
 # Run migrations
 cd backend && npm run migrate
@@ -274,13 +274,13 @@ LinkedIn:    linkedin.com/in/profile or linkedin.com/company/name
 When connecting social accounts on the live deployment, set callback URLs to:
 
 ```
-https://publift.vercel.app/api/oauth/tiktok/callback
-https://publift.vercel.app/api/oauth/youtube/callback
-https://publift.vercel.app/api/oauth/instagram/callback
-https://publift.vercel.app/api/oauth/facebook/callback
-https://publift.vercel.app/api/oauth/x/callback
-https://publift.vercel.app/api/oauth/linkedin/callback
-https://publift.vercel.app/api/auth/google/callback
+https://spyrex.vercel.app/api/oauth/tiktok/callback
+https://spyrex.vercel.app/api/oauth/youtube/callback
+https://spyrex.vercel.app/api/oauth/instagram/callback
+https://spyrex.vercel.app/api/oauth/facebook/callback
+https://spyrex.vercel.app/api/oauth/x/callback
+https://spyrex.vercel.app/api/oauth/linkedin/callback
+https://spyrex.vercel.app/api/auth/google/callback
 ```
 
 Update these in each platform's developer console (TikTok, Google Cloud, Meta, X, LinkedIn).
@@ -476,7 +476,7 @@ Full documentation: [backend/README.md](backend/README.md)
 This is a proprietary commercial product. Contributions are welcome by invitation only.
 
 If you'd like to contribute:
-1. Contact us at dev@publift.io
+1. Contact us at dev@spyrex.io
 2. Review our contribution guidelines
 3. Sign the Contributor License Agreement (CLA)
 
@@ -486,14 +486,14 @@ If you'd like to contribute:
 
 **Proprietary License** - All Rights Reserved
 
-Copyright © 2024-2025 Publift. Unauthorized copying, modification, distribution, or use of this software is strictly prohibited.
+Copyright © 2024-2025 SpyRex. Unauthorized copying, modification, distribution, or use of this software is strictly prohibited.
 
 ---
 
 ## 💬 Support & Contact
 
-- **Email:** support@publift.io
-- **Documentation:** [docs.publift.io](https://docs.publift.io)
+- **Email:** support@spyrex.io
+- **Documentation:** [docs.spyrex.io](https://docs.spyrex.io)
 - **Issues:** Report bugs via GitHub Issues
 - **Feature Requests:** Use GitHub Discussions
 
@@ -514,7 +514,7 @@ Built with these amazing technologies:
 
 ⭐ Star this repo if you find it useful!
 
-[Website](https://publift.io) • [Documentation](https://docs.publift.io) • [Twitter](https://twitter.com/publift) • [LinkedIn](https://linkedin.com/company/publift)
+[Website](https://spyrex.io) • [Documentation](https://docs.spyrex.io) • [Twitter](https://twitter.com/spyrex) • [LinkedIn](https://linkedin.com/company/spyrex)
 
 </div>
 

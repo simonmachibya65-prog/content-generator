@@ -127,7 +127,7 @@ FACEBOOK_APP_SECRET=...
 # ... etc for other platforms
 
 # Database
-DATABASE_URL=postgresql://user:pass@localhost:5432/publift
+DATABASE_URL=postgresql://user:pass@localhost:5432/spyrex
 
 # JWT
 JWT_SECRET=your-secret-key

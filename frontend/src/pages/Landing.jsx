@@ -71,7 +71,7 @@ const PLANS = [
 
 /* ─── Testimonials ────────────────────────────── */
 const TESTIMONIALS = [
-  { quote: 'Publift cuts my content work in half. I schedule a whole week in 20 minutes.', name: 'Rita Iglesias', role: 'Software engineer & creator', avatar: 'RI', bg: 'bg-violet-500' },
+  { quote: 'SpyRex cuts my content work in half. I schedule a whole week in 20 minutes.', name: 'Rita Iglesias', role: 'Software engineer & creator', avatar: 'RI', bg: 'bg-violet-500' },
   { quote: 'The per-channel pricing is perfect for agencies. I only pay for what I use.', name: 'Alexandrea Bowman', role: 'Sapphire Social', avatar: 'AB', bg: 'bg-blue-500' },
   { quote: 'Insights plain-language takeaways changed how I report to clients.', name: 'Dustin Kuhns', role: 'Marketing Consultant', avatar: 'DK', bg: 'bg-green-500' },
 ];
@@ -311,7 +311,7 @@ export default function Landing() {
       {/* ── TRUST BAR ──────────────────────────────────── */}
       <section className="border-y border-stone-100 bg-stone-50 py-6">
         <div className="max-w-5xl mx-auto px-4 text-center">
-          <p className="text-sm text-stone-400 font-medium mb-4">335,609 creators, brands, and agencies using Publift</p>
+          <p className="text-sm text-stone-400 font-medium mb-4">335,609 creators, brands, and agencies using SpyRex</p>
           <div className="flex flex-wrap justify-center gap-6 md:gap-10">
             {['VICE', 'Wired', 'Semrush', 'Crocs', 'Benefit', 'ElevenLabs', 'Shopify'].map(b => (
               <span key={b} className="text-stone-300 font-bold text-base uppercase tracking-wide">{b}</span>
@@ -419,7 +419,7 @@ export default function Landing() {
                 Plan and post from your AI assistant
               </h2>
               <p className="text-stone-500 text-lg mb-6 leading-relaxed">
-                Connect Publift to Claude or ChatGPT and manage your whole workflow from a conversation.
+                Connect SpyRex to Claude or ChatGPT and manage your whole workflow from a conversation.
               </p>
               {[
                 { step: 'Ask', desc: '"What were my top posts?" — AI pulls real numbers.' },
@@ -442,7 +442,7 @@ export default function Landing() {
                   <Bot size={16} className="text-white" />
                 </div>
                 <div>
-                  <p className="font-semibold text-stone-900 text-sm">Publift AI</p>
+                  <p className="font-semibold text-stone-900 text-sm">SpyRex AI</p>
                   <p className="text-xs text-green-500">● Online</p>
                 </div>
               </div>
@@ -604,7 +604,7 @@ export default function Landing() {
                 <div className="w-8 h-8 bg-green-500 rounded-xl flex items-center justify-center">
                   <Zap size={16} className="text-white" />
                 </div>
-                <span className="text-white font-bold text-lg">Publift</span>
+                <span className="text-white font-bold text-lg">SpyRex</span>
               </div>
               <p className="text-sm leading-relaxed">Your social media workspace. Works with every platform, plugs into your favorite tools.</p>
             </div>
@@ -624,7 +624,7 @@ export default function Landing() {
             ))}
           </div>
           <div className="border-t border-stone-800 pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-xs">
-            <p>© 2025 Publift. All rights reserved.</p>
+            <p>© 2025 SpyRex. All rights reserved.</p>
             <p>Built for creators, marketers, and agencies worldwide.</p>
           </div>
         </div>

@@ -41,7 +41,7 @@ app.use(cors({
   origin: [
     process.env.APP_URL || 'http://localhost:3000',
     /\.vercel\.app$/,  // Allow all Vercel preview/production domains
-    'https://publift-frontend.vercel.app'
+    'https://spyrex-frontend.vercel.app'
   ].filter(Boolean),
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
@@ -95,7 +95,7 @@ app.use('/api/advertising', advertisingRoutes);
 app.get('/health', (req, res) => {
   res.json({
     status: 'ok',
-    service: 'Publift API',
+    service: 'SpyRex API',
     version: '1.0.0',
     timestamp: new Date().toISOString()
   });
@@ -105,7 +105,7 @@ app.get('/health', (req, res) => {
 app.get('/api/health', (req, res) => {
   res.json({
     status: 'ok',
-    service: 'Publift API',
+    service: 'SpyRex API',
     version: '1.0.0',
     timestamp: new Date().toISOString()
   });
@@ -139,7 +139,7 @@ if (!process.env.VERCEL) {
       logger.info('Scheduler initialized');
 
       app.listen(PORT, () => {
-        logger.info(`Publift API running on port ${PORT}`);
+        logger.info(`SpyRex API running on port ${PORT}`);
         logger.info(`Environment: ${process.env.NODE_ENV}`);
       });
     } catch (err) {

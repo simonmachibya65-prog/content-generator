@@ -1,7 +1,7 @@
 {
-  "name": "publift-backend",
+  "name": "spyrex-backend",
   "version": "1.0.0",
-  "description": "Publift - AI Social Media Management Platform - Backend API",
+  "description": "SpyRex - AI Social Media Management Platform - Backend API",
   "main": "src/server.js",
   "scripts": {
     "start": "node src/server.js",

@@ -28,7 +28,7 @@ export default function Help() {
       id: 2,
       category: 'getting-started',
       title: 'Understanding your dashboard',
-      description: 'Navigate your Publift dashboard and understand key metrics',
+      description: 'Navigate your SpyRex dashboard and understand key metrics',
       readTime: '5 min read',
     },
     {
@@ -120,7 +120,7 @@ export default function Help() {
   const videos = [
     {
       id: 1,
-      title: 'Getting Started with Publift',
+      title: 'Getting Started with SpyRex',
       duration: '8:42',
       thumbnail: 'https://via.placeholder.com/320x180/4F46E5/ffffff?text=Getting+Started',
     },
@@ -152,7 +152,7 @@ export default function Help() {
       <div className="bg-white border-b">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <h1 className="text-3xl font-bold text-gray-900 mb-2">Help Center</h1>
-          <p className="text-gray-600">Find answers and learn how to get the most out of Publift</p>
+          <p className="text-gray-600">Find answers and learn how to get the most out of SpyRex</p>
           
           {/* Search */}
           <div className="mt-6 relative">
@@ -201,7 +201,7 @@ export default function Help() {
             {/* Quick Actions */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <a
-                href="mailto:support@publift.io"
+                href="mailto:support@spyrex.io"
                 className="bg-white rounded-lg shadow-sm p-6 hover:shadow-md transition-shadow"
               >
                 <Mail className="w-8 h-8 text-indigo-600 mb-3" />

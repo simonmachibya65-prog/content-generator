@@ -47,7 +47,7 @@
 
 1. Go to [Google Cloud Console](https://console.cloud.google.com/)
 2. Click **"Create Project"**
-3. Name: `Publift` (or your platform name)
+3. Name: `SpyRex` (or your platform name)
 4. Click **Create**
 
 ### Step 2: Enable Google+ API
@@ -61,7 +61,7 @@
 1. Go to **APIs & Services** → **OAuth consent screen**
 2. Select **External** (for public users)
 3. Fill in:
-   - **App name:** Publift
+   - **App name:** SpyRex
    - **User support email:** your@email.com
    - **Developer contact:** your@email.com
 4. Click **Save and Continue**
@@ -80,7 +80,7 @@
 1. Go to **APIs & Services** → **Credentials**
 2. Click **+ Create Credentials** → **OAuth client ID**
 3. Application type: **Web application**
-4. Name: `Publift Web Client`
+4. Name: `SpyRex Web Client`
 
 5. **Authorized JavaScript origins:**
    ```
@@ -146,7 +146,7 @@ APP_URL=https://yourdomain.com
 ### Login Page:
 ```
 ┌──────────────────────────────────────┐
-│         Publift Logo                 │
+│         SpyRex Logo                 │
 │   AI Social Media Management         │
 │                                      │
 │  ┌────────────────────────────────┐ │
@@ -188,7 +188,7 @@ APP_URL=https://yourdomain.com
 ```
 1. Click "Continue with Google"
    ↓
-2. Google: "Publift wants to access..."
+2. Google: "SpyRex wants to access..."
    ↓
 3. User clicks "Allow"
    ↓

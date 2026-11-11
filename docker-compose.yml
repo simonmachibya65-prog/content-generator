@@ -5,31 +5,31 @@ services:
   # ── PostgreSQL Database ─────────────────────────────────────
   postgres:
     image: postgres:16-alpine
-    container_name: publift_postgres
+    container_name: spyrex_postgres
     restart: unless-stopped
     environment:
-      POSTGRES_USER: ${DB_USER:-publift}
-      POSTGRES_PASSWORD: ${DB_PASSWORD:-publift_secure_2024}
-      POSTGRES_DB: ${DB_NAME:-publift_db}
+      POSTGRES_USER: ${DB_USER:-spyrex}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-spyrex_secure_2024}
+      POSTGRES_DB: ${DB_NAME:-spyrex_db}
     volumes:
       - postgres_data:/var/lib/postgresql/data
       - ./backend/src/database/schema.sql:/docker-entrypoint-initdb.d/01_schema.sql
     ports:
       - "5432:5432"
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U ${DB_USER:-publift} -d ${DB_NAME:-publift_db}"]
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER:-spyrex} -d ${DB_NAME:-spyrex_db}"]
       interval: 10s
       timeout: 5s
       retries: 5
     networks:
-      - publift_network
+      - spyrex_network
 
   # ── Backend API ─────────────────────────────────────────────
   backend:
     build:
       context: ./backend
       dockerfile: Dockerfile
-    container_name: publift_backend
+    container_name: spyrex_backend
     restart: unless-stopped
     depends_on:
       postgres:
@@ -37,7 +37,7 @@ services:
     environment:
       NODE_ENV: production
       PORT: 5000
-      DATABASE_URL: postgresql://${DB_USER:-publift}:${DB_PASSWORD:-publift_secure_2024}@postgres:5432/${DB_NAME:-publift_db}
+      DATABASE_URL: postgresql://${DB_USER:-spyrex}:${DB_PASSWORD:-spyrex_secure_2024}@postgres:5432/${DB_NAME:-spyrex_db}
       APP_URL: ${APP_URL:-http://localhost}
       BACKEND_URL: ${BACKEND_URL:-http://localhost/api}
       JWT_SECRET: ${JWT_SECRET}
@@ -74,7 +74,7 @@ services:
       - uploads_data:/app/uploads
       - logs_data:/app/logs
     networks:
-      - publift_network
+      - spyrex_network
     healthcheck:
       test: ["CMD-SHELL", "wget -qO- http://localhost:5000/health || exit 1"]
       interval: 30s
@@ -89,7 +89,7 @@ services:
       dockerfile: Dockerfile
       args:
         VITE_API_URL: /api
-    container_name: publift_frontend
+    container_name: spyrex_frontend
     restart: unless-stopped
     depends_on:
       backend:
@@ -97,7 +97,7 @@ services:
     ports:
       - "${PORT:-80}:80"
     networks:
-      - publift_network
+      - spyrex_network
     healthcheck:
       test: ["CMD-SHELL", "wget -qO- http://localhost/health || exit 1"]
       interval: 30s
@@ -107,14 +107,14 @@ services:
 # ── Volumes ─────────────────────────────────────────────────
 volumes:
   postgres_data:
-    name: publift_postgres_data
+    name: spyrex_postgres_data
   uploads_data:
-    name: publift_uploads_data
+    name: spyrex_uploads_data
   logs_data:
-    name: publift_logs_data
+    name: spyrex_logs_data
 
 # ── Networks ─────────────────────────────────────────────────
 networks:
-  publift_network:
-    name: publift_network
+  spyrex_network:
+    name: spyrex_network
     driver: bridge
