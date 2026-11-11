@@ -1,2 +1,36 @@
+# ── Node modules ─────────────────────────────
+node_modules
 backend/node_modules
 frontend/node_modules
+
+# ── Environment & secrets ─────────────────────
+.env
+.env.*
+.env.local
+.env.*.local
+backend/.env
+backend/.env.local
+frontend/.env.local
+.vercel-token
+
+# ── Backend source (not needed by Vercel build)
+backend/
+
+# ── Logs ─────────────────────────────────────
+logs/
+*.log
+backend/logs/
+
+# ── Dev & OS files ────────────────────────────
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+.kiro/
+
+# ── Test & temp ───────────────────────────────
+uploads/
+tmp/
+temp/
+*.sqlite
+*.db
