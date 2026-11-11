@@ -4,10 +4,10 @@
   "description": "Publift - AI Social Media Management Platform - Backend API",
   "main": "index.js",
   "scripts": {
-    "start": "node ../src/server.js",
-    "dev": "nodemon ../src/server.js",
-    "migrate": "node ../src/database/migrate.js",
-    "seed": "node ../src/database/seed.js"
+    "start": "node src/server.js",
+    "dev": "nodemon src/server.js",
+    "migrate": "node src/database/migrate.js",
+    "seed": "node src/database/seed.js"
   },
   "dependencies": {
     "express": "^4.18.2",
